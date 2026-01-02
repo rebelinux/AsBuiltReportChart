@@ -6,13 +6,26 @@ namespace AsBuiltReportChart
     {
         public static void Main(string[] args)
         {
-            double[] values = [20,7, 40];
-            string[] labels = ["cpu", "mem", "hdd"];
+
+            Count.CountDown();
+            
+            double[] values = [100, 7, 40, 18];
+            string[] labels = ["Instances Capacity", "Used Instances", "New Instances", "Rental Instances"];
 
             Chart.EnableLegend = true;
-            // Chart.Title = "Caca";
+            Chart.Title = "Instance License Usage";
+            Chart.LabelBold = false;
+            Chart.LabelFontSize = 20;
+            Chart.ChartBorderStyle = BorderStyle.Dotted;
+            Chart.ChartBorderColor = ScottPlot.Color.FromColor(System.Drawing.Color.DarkGreen);
+             Chart.ChartBorderSize = 2;
+            Chart.EnableChartBorder = true;
+            Chart.LegendOriantation = Orientation.Vertical;
+            Chart.LegendAlignment = Alignment.UpperRight;
+            Chart.LegendBorderSize = 0;
+            Chart.LabelDistance = 0.6;
 
-            Chart.PieChart(values, labels, width:600,height:400);
+            Pie.Chart(values, labels, width: 600, height: 400);
         }
 
     }
