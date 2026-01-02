@@ -24,7 +24,25 @@ public class Chart
             }
             else
             {
-                throw new ArgumentException("Error: LabelDistance value rage must be from 0.5 to 0.9.");
+                throw new ArgumentException("Error: LabelDistance value range must be from 0.5 to 0.9.");
+            }
+        }
+    }
+
+    // this set the distance of the chart area elements
+    internal static double _areaExplodeFraction = 0;
+    public static double AreaExplodeFraction
+    {
+        get { return _areaExplodeFraction; }
+        set
+        {
+            if (value >= 0.1 && value <= 0.5)
+            {
+                _areaExplodeFraction = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: AreaExplodeFraction value range must be from 0.1 to 0.5.");
             }
         }
     }
@@ -52,5 +70,5 @@ public class Chart
 
     // Color Pallete settings
 
-    
+
 }

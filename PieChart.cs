@@ -11,11 +11,11 @@ public class Pie : Chart
             Plot myPlot = new();
 
             // myPlot.Add.Palette = new ScottPlot.Palettes.DarkPastel();
-            string[] customColors = { "#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b" };
+            string[] customColors = ["#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
             myPlot.Add.Palette = new ScottPlot.Palettes.Custom(customColors);
 
             var pie = myPlot.Add.Pie(values);
-            // pie.ExplodeFraction = .1;
+            pie.ExplodeFraction = _areaExplodeFraction;
             pie.SliceLabelDistance = _labelDistance;
 
             // set each slice value to its label

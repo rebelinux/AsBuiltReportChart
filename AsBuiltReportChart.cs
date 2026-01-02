@@ -5,10 +5,7 @@ namespace AsBuiltReportChart
     public class MainEntry
     {
         public static void Main(string[] args)
-        {
-
-            Count.CountDown();
-            
+        {        
             double[] values = [100, 7, 40, 18];
             string[] labels = ["Instances Capacity", "Used Instances", "New Instances", "Rental Instances"];
 
@@ -23,7 +20,6 @@ namespace AsBuiltReportChart
             Chart.LegendOriantation = Orientation.Vertical;
             Chart.LegendAlignment = Alignment.UpperRight;
             Chart.LegendBorderSize = 0;
-            Chart.LabelDistance = 0.6;
 
             Pie.Chart(values, labels, width: 600, height: 400);
         }
