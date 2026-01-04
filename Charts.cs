@@ -61,7 +61,7 @@ public class Chart
     internal static ScottPlot.Alignment legendAlignment;
     public static Alignment LegendAlignment { get; set; } = Alignment.LowerRight;
 
-    // Chart boder settings
+    // Chart border settings
     public static bool EnableChartBorder { get; set; } = false;
     internal static ScottPlot.LinePattern chartborderstyle;
     public static BorderStyle ChartBorderStyle { get; set; }

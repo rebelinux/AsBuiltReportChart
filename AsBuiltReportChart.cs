@@ -23,6 +23,5 @@ namespace AsBuiltReportChart
 
             Pie.Chart(values, labels, width: 600, height: 400);
         }
-
     }
 }
