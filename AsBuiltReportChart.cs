@@ -1,4 +1,4 @@
-using System;
+using AsBuiltReportChart.Enums;
 
 namespace AsBuiltReportChart
 {
@@ -13,12 +13,12 @@ namespace AsBuiltReportChart
             Chart.Title = "Instance License Usage";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 20;
-            Chart.ChartBorderStyle = BorderStyle.Dotted;
+            Chart.ChartBorderStyle = BorderStyles.Dotted;
             Chart.ChartBorderColor = ScottPlot.Color.FromColor(System.Drawing.Color.DarkGreen);
              Chart.ChartBorderSize = 2;
             Chart.EnableChartBorder = true;
-            Chart.LegendOriantation = Orientation.Vertical;
-            Chart.LegendAlignment = Alignment.UpperRight;
+            Chart.LegendOriantation = Orientations.Vertical;
+            Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
             Pie.Chart(values, labels, width: 600, height: 400);

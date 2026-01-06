@@ -1,5 +1,5 @@
-﻿using HarfBuzzSharp;
-using ScottPlot;
+﻿using ScottPlot;
+using AsBuiltReportChart.Enums;
 namespace AsBuiltReportChart;
 
 public class Pie : Chart
@@ -44,32 +44,31 @@ public class Pie : Chart
 
                 myPlot.Legend.OutlinePattern = legendborderstyle = LegendBorderStyle switch
                 {
-                    BorderStyle.Solid => ScottPlot.LinePattern.Solid,
-                    BorderStyle.Dashed => ScottPlot.LinePattern.Dashed,
-                    BorderStyle.Dotted => ScottPlot.LinePattern.Dotted,
-                    BorderStyle.DenselyDashed => ScottPlot.LinePattern.DenselyDashed,
-                    _ => ScottPlot.LinePattern.Solid,
+                    BorderStyles.Solid => LinePattern.Solid,
+                    BorderStyles.Dashed => LinePattern.Dashed,
+                    BorderStyles.Dotted => LinePattern.Dotted,
+                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                    _ => LinePattern.Solid,
                 };
 
                 myPlot.Legend.Orientation = legendOriantation = LegendOriantation switch
                 {
-                    Orientation.Horizontal => ScottPlot.Orientation.Horizontal,
-                    Orientation.Vertical => ScottPlot.Orientation.Vertical,
-                    _ => ScottPlot.Orientation.Vertical,
+                    Orientations.Horizontal => Orientation.Horizontal,
+                    _ => Orientation.Vertical,
                 };
 
                 myPlot.Legend.Alignment = legendAlignment = LegendAlignment switch
                 {
-                    Alignment.LowerCenter => ScottPlot.Alignment.LowerCenter,
-                    Alignment.LowerLeft => ScottPlot.Alignment.LowerLeft,
-                    Alignment.LowerRight => ScottPlot.Alignment.LowerRight,
-                    Alignment.MiddleCenter => ScottPlot.Alignment.MiddleCenter,
-                    Alignment.MiddleLeft => ScottPlot.Alignment.MiddleLeft,
-                    Alignment.MiddleRight => ScottPlot.Alignment.MiddleRight,
-                    Alignment.UpperCenter => ScottPlot.Alignment.UpperCenter,
-                    Alignment.UpperLeft => ScottPlot.Alignment.UpperLeft,
-                    Alignment.UpperRight => ScottPlot.Alignment.UpperRight,
-                    _ => ScottPlot.Alignment.LowerRight,
+                    Alignments.LowerCenter => Alignment.LowerCenter,
+                    Alignments.LowerLeft => Alignment.LowerLeft,
+                    Alignments.LowerRight => Alignment.LowerRight,
+                    Alignments.MiddleCenter => Alignment.MiddleCenter,
+                    Alignments.MiddleLeft => Alignment.MiddleLeft,
+                    Alignments.MiddleRight => Alignment.MiddleRight,
+                    Alignments.UpperCenter => Alignment.UpperCenter,
+                    Alignments.UpperLeft => Alignment.UpperLeft,
+                    Alignments.UpperRight => Alignment.UpperRight,
+                    _ => Alignment.LowerRight,
                 };
             }
 
@@ -81,11 +80,11 @@ public class Pie : Chart
                     Width = ChartBorderSize,
                     Pattern = chartborderstyle = ChartBorderStyle switch
                     {
-                        BorderStyle.Solid => ScottPlot.LinePattern.Solid,
-                        BorderStyle.Dashed => ScottPlot.LinePattern.Dashed,
-                        BorderStyle.Dotted => ScottPlot.LinePattern.Dotted,
-                        BorderStyle.DenselyDashed => ScottPlot.LinePattern.DenselyDashed,
-                        _ => ScottPlot.LinePattern.Solid,
+                        BorderStyles.Solid => LinePattern.Solid,
+                        BorderStyles.Dashed => LinePattern.Dashed,
+                        BorderStyles.Dotted => LinePattern.Dotted,
+                        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                        _ => LinePattern.Solid,
                     },
                 };
             }

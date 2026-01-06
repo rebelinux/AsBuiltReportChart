@@ -1,14 +1,14 @@
-using HarfBuzzSharp;
 using ScottPlot;
+using AsBuiltReportChart.Enums;
 namespace AsBuiltReportChart;
 
 public class Chart
 {
     // Title setting
     public static string? Title { get; set; }
-    public static bool TitleFontBold { get; set; } = false;
-    public static int TitleFontSize { get; set; } = 14;
-    public static Color TitleFontColor { get; set; } = Colors.Black;
+    protected static bool TitleFontBold { get; set; } = false;
+    protected static int TitleFontSize { get; set; } = 14;
+    protected static Color TitleFontColor { get; set; } = Colors.Black;
 
     // Font settings
     public static int LabelFontSize { get; set; } = 14;
@@ -30,7 +30,7 @@ public class Chart
     }
 
     // this set the distance of the chart area elements
-    internal static double _areaExplodeFraction = 0;
+    internal static double _areaExplodeFraction;
     public static double AreaExplodeFraction
     {
         get { return _areaExplodeFraction; }
@@ -46,25 +46,25 @@ public class Chart
             }
         }
     }
-    public static Color LabelFontColor { get; set; } = Colors.Black;
-    public static bool LabelBold { get; set; } = false;
+    protected static Color LabelFontColor { get; set; } = Colors.Black;
+    public static bool LabelBold { get; set; }
 
     // Legend setting
-    public static bool EnableLegend { get; set; } = false;
+    public static bool EnableLegend { get; set; }
     // Legend boder settings
-    internal static ScottPlot.LinePattern legendborderstyle;
-    public static BorderStyle LegendBorderStyle { get; set; } = BorderStyle.Solid;
+    internal static LinePattern legendborderstyle;
+    protected static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
     public static int LegendBorderSize { get; set; } = 1;
-    public static Color LegendBorderColor { get; set; } = Colors.Black; // Todo chage this to rgb color
-    internal static ScottPlot.Orientation legendOriantation;
-    public static Orientation LegendOriantation { get; set; } = Orientation.Vertical;
-    internal static ScottPlot.Alignment legendAlignment;
-    public static Alignment LegendAlignment { get; set; } = Alignment.LowerRight;
+    protected static Color LegendBorderColor { get; set; } = Colors.Black; // Todo chage this to rgb color
+    internal static Orientation legendOriantation;
+    public static Orientations LegendOriantation { get; set; } = Orientations.Vertical;
+    internal static Alignment legendAlignment;
+    public static Alignments LegendAlignment { get; set; } = Alignments.LowerRight;
 
     // Chart border settings
-    public static bool EnableChartBorder { get; set; } = false;
-    internal static ScottPlot.LinePattern chartborderstyle;
-    public static BorderStyle ChartBorderStyle { get; set; }
+    public static bool EnableChartBorder { get; set; }
+    internal static LinePattern chartborderstyle;
+    public static BorderStyles ChartBorderStyle { get; set; }
     public static int ChartBorderSize { get; set; } = 1;
     public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo chage this to rgb color
 

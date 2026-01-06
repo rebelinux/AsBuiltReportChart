@@ -1,8 +1,6 @@
-using HarfBuzzSharp;
-using ScottPlot;
-namespace AsBuiltReportChart
+namespace AsBuiltReportChart.Enums
 {
-    public enum BorderStyle
+    public enum BorderStyles
     {
         Solid,
         Dashed,
@@ -10,13 +8,13 @@ namespace AsBuiltReportChart
         DenselyDashed
     }
 
-    public enum Orientation
+    public enum Orientations
     {
         Horizontal,
         Vertical
     }
 
-    public enum Alignment
+    public enum Alignments
     {
         LowerCenter,
         LowerLeft,
