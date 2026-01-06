@@ -1,15 +1,15 @@
-- [ ] Add chart boder option
+- [ ] Add chart border option
     - [x] Border color
     - [x]  Border width
     - [x]  Border line style (solid, dashed etc)
 
-- [ ]  Add legend
-    - [ ]  Legend position (Top, Down, Edge)
-    - [ ] legend orientation (Vertical, Horizontal)
+- [x]  Add legend
+    - [x]  Legend position (Top, Down, Edge)
+    - [x] legend orientation (Vertical, Horizontal)
     - [x] legend font properties
     - [x] legend box line properties (No Line)
 
-- [ ] Custom Color pallete
+- [ ] Custom Color palette
 
 ```c#
 string[] customColors = { "#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898" , "#5e9584", "#458370", "#2a715d", "#005f4b"};

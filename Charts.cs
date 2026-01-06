@@ -18,7 +18,7 @@ public class Chart
         get { return _labelDistance; }
         set
         {
-            if (value >= 0.5 && value <= 0.9)
+            if (value is >= 0.5 and <= 0.9)
             {
                 _labelDistance = value;
             }
@@ -36,7 +36,7 @@ public class Chart
         get { return _areaExplodeFraction; }
         set
         {
-            if (value >= 0.1 && value <= 0.5)
+            if (value is >= 0.1 and <= 0.5)
             {
                 _areaExplodeFraction = value;
             }
@@ -51,13 +51,13 @@ public class Chart
 
     // Legend setting
     public static bool EnableLegend { get; set; }
-    // Legend boder settings
+    // Legend border settings
     internal static LinePattern legendborderstyle;
     protected static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
     public static int LegendBorderSize { get; set; } = 1;
-    protected static Color LegendBorderColor { get; set; } = Colors.Black; // Todo chage this to rgb color
+    protected static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
     internal static Orientation legendOriantation;
-    public static Orientations LegendOriantation { get; set; } = Orientations.Vertical;
+    public static Orientations LegendOrientation { get; set; } = Orientations.Vertical;
     internal static Alignment legendAlignment;
     public static Alignments LegendAlignment { get; set; } = Alignments.LowerRight;
 
@@ -66,7 +66,7 @@ public class Chart
     internal static LinePattern chartborderstyle;
     public static BorderStyles ChartBorderStyle { get; set; }
     public static int ChartBorderSize { get; set; } = 1;
-    public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo chage this to rgb color
+    public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo change this to rgb color
 
     // Color Pallete settings
 

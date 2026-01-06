@@ -19,7 +19,7 @@ public class Pie : Chart
             pie.SliceLabelDistance = _labelDistance;
 
             // set each slice value to its label
-            for (int i = 0; i < pie.Slices.Count; i++)
+            for (var i = 0; i < pie.Slices.Count; i++)
             {
                 pie.Slices[i].LabelText = values[i].ToString();
                 pie.Slices[i].LabelFontSize = LabelFontSize;
@@ -51,7 +51,7 @@ public class Pie : Chart
                     _ => LinePattern.Solid,
                 };
 
-                myPlot.Legend.Orientation = legendOriantation = LegendOriantation switch
+                myPlot.Legend.Orientation = legendOriantation = LegendOrientation switch
                 {
                     Orientations.Horizontal => Orientation.Horizontal,
                     _ => Orientation.Vertical,

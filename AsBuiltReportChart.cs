@@ -17,7 +17,7 @@ namespace AsBuiltReportChart
             Chart.ChartBorderColor = ScottPlot.Color.FromColor(System.Drawing.Color.DarkGreen);
              Chart.ChartBorderSize = 2;
             Chart.EnableChartBorder = true;
-            Chart.LegendOriantation = Orientations.Vertical;
+            Chart.LegendOrientation = Orientations.Vertical;
             Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
