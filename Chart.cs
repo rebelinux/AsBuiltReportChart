@@ -6,9 +6,9 @@ public class Chart
 {
     // Title setting
     public static string? Title { get; set; }
-    protected static bool TitleFontBold { get; set; } = false;
-    protected static int TitleFontSize { get; set; } = 14;
-    protected static Color TitleFontColor { get; set; } = Colors.Black;
+    public static bool TitleFontBold { get; set; } = false;
+    public static int TitleFontSize { get; set; } = 14;
+    public static Color TitleFontColor { get; set; } = Colors.Black;
 
     // Font settings
     public static int LabelFontSize { get; set; } = 14;
@@ -46,16 +46,16 @@ public class Chart
             }
         }
     }
-    protected static Color LabelFontColor { get; set; } = Colors.Black;
+    public static Color LabelFontColor { get; set; } = Colors.Black;
     public static bool LabelBold { get; set; }
 
     // Legend setting
     public static bool EnableLegend { get; set; }
     // Legend border settings
     internal static LinePattern legendborderstyle;
-    protected static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
+    public static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
     public static int LegendBorderSize { get; set; } = 1;
-    protected static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
+    public static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
     internal static Orientation legendOriantation;
     public static Orientations LegendOrientation { get; set; } = Orientations.Vertical;
     internal static Alignment legendAlignment;
@@ -68,7 +68,26 @@ public class Chart
     public static int ChartBorderSize { get; set; } = 1;
     public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo change this to rgb color
 
-    // Color Pallete settings
+    // Color Palette settings
+    internal static IPalette? colorPalette;
+    public static ColorPalettes ColorPalette { get; set; } = ColorPalettes.Normal;
 
+    // Custom color palette
 
+    private static string[]? _customColorPalette;
+    public static string[] CustomColorPalette
+    {
+        get
+        {
+            return _customColorPalette ?? [];
+        }
+        set
+        {
+            if (value.Length < 3)
+            {
+                throw new ArgumentException("Error: CustomColorPalette must contain at least 3 colors.");
+            }
+            _customColorPalette = value;
+        }
+    }
 }

@@ -9,7 +9,9 @@
     - [x] legend font properties
     - [x] legend box line properties (No Line)
 
-- [ ] Custom Color palette
+- [ ] Add Color palette
+    - [x] ScottPlot.Palette
+    - [ ] Custom Color palette
 
 ```c#
 string[] customColors = { "#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898" , "#5e9584", "#458370", "#2a715d", "#005f4b"};

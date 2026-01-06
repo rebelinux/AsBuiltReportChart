@@ -26,6 +26,32 @@ namespace AsBuiltReportChart.Enums
         UpperLeft,
         UpperRight
     }
-
-
+    public enum ColorPalettes
+    {
+        Amber,
+        Category10,
+        Category20,
+        Aurora,
+        Building,
+        ColorblindFriendly,
+        ColorblindFriendlyDark,
+        Dark,
+        DarkPastel,
+        Frost,
+        LightOcean,
+        LightSpectrum,
+        Microcharts,
+        Nero,
+        Nord,
+        Normal,
+        OneHalf,
+        OneHalfDark,
+        PastelWheel,
+        Penumbra,
+        PolarNight,
+        Redness,
+        SnowStorm,
+        SummerSplash,
+        Tsitsulin
+    }
 }
