@@ -20,7 +20,35 @@ public class Pie : Chart
                 // Set ScottPlot native color palette
                 if (colorPalette is not null)
                 {
-                    myPlot.Add.Palette = colorPalette;
+                    myPlot.Add.Palette = colorPalette = ColorPalette switch
+                    {
+                        ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
+                        ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
+                        ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
+                        ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
+                        ColorPalettes.Building => new ScottPlot.Palettes.Building(),
+                        ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
+                        ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
+                        ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
+                        ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
+                        ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
+                        ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
+                        ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
+                        ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
+                        ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
+                        ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
+                        ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
+                        ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
+                        ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
+                        ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
+                        ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
+                        ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
+                        ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
+                        ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
+                        ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
+                        ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
+                        _ => new ScottPlot.Palettes.Category10()
+                    };
                 }
             }
 
@@ -52,11 +80,34 @@ public class Pie : Chart
                 myPlot.Legend.OutlineColor = LegendBorderColor;
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = legendborderstyle;
+                myPlot.Legend.OutlinePattern = legendborderstyle = LegendBorderStyle switch
+                {
+                    BorderStyles.Solid => LinePattern.Solid,
+                    BorderStyles.Dashed => LinePattern.Dashed,
+                    BorderStyles.Dotted => LinePattern.Dotted,
+                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                    _ => LinePattern.Solid
+                };
 
-                myPlot.Legend.Orientation = legendOrientation;
+                myPlot.Legend.Orientation = legendOrientation = LegendOrientation switch
+                {
+                    Orientations.Horizontal => Orientation.Horizontal,
+                    _ => Orientation.Vertical
+                };
 
-                myPlot.Legend.Alignment = legendAlignment;
+                myPlot.Legend.Alignment = legendAlignment = LegendAlignment switch
+                {
+                    Alignments.LowerCenter => Alignment.LowerCenter,
+                    Alignments.LowerLeft => Alignment.LowerLeft,
+                    Alignments.LowerRight => Alignment.LowerRight,
+                    Alignments.MiddleCenter => Alignment.MiddleCenter,
+                    Alignments.MiddleLeft => Alignment.MiddleLeft,
+                    Alignments.MiddleRight => Alignment.MiddleRight,
+                    Alignments.UpperCenter => Alignment.UpperCenter,
+                    Alignments.UpperLeft => Alignment.UpperLeft,
+                    Alignments.UpperRight => Alignment.UpperRight,
+                    _ => Alignment.LowerRight
+                };
             }
 
             if (EnableChartBorder)
@@ -65,7 +116,14 @@ public class Pie : Chart
                 {
                     Color = ChartBorderColor,
                     Width = ChartBorderSize,
-                    Pattern = chartborderstyle
+                    Pattern = chartborderstyle = ChartBorderStyle switch
+                    {
+                        BorderStyles.Solid => LinePattern.Solid,
+                        BorderStyles.Dashed => LinePattern.Dashed,
+                        BorderStyles.Dotted => LinePattern.Dotted,
+                        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                        _ => LinePattern.Solid
+                    }
                 };
             }
 

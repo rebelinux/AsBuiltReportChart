@@ -21,6 +21,7 @@ public class Chart
             }
         }
     }
+
     // Title setting
     public static string? Title { get; set; }
     public static bool TitleFontBold { get; set; } = false;
@@ -36,8 +37,8 @@ public class Chart
     public static bool LabelBold { get; set; }
 
     // Set font for the X and Y axis labels
-    public static string LabelYAxis { get; set; } = "Y Axis";
-    public static string LabelXAxis { get; set; } = "X Axis";
+    public static string LabelYAxis { get; set; } = "Count";
+    public static string LabelXAxis { get; set; } = "Values";
 
 
     // Bar Axes Font settings
@@ -46,6 +47,7 @@ public class Chart
     public static bool AxisLabelFontBold { get; set; }
 
     // this set the distance of the labels from the chart center
+    internal static double _labelDistance = 0.6;
     public static double LabelDistance
     {
         get { return _labelDistance; }
@@ -61,17 +63,13 @@ public class Chart
             }
         }
     }
-    internal static double _labelDistance = 0.6;
 
     // this set the orientation chart area 
     public static Orientations AreaOrientation { get; set; } = Orientations.Vertical;
-    internal static Orientation _areaOrientation = AreaOrientation switch
-    {
-        Orientations.Horizontal => Orientation.Horizontal,
-        _ => Orientation.Vertical
-    };
+
 
     // this set the distance of the chart area elements
+    internal static double _areaExplodeFraction;
     public static double AreaExplodeFraction
     {
         get { return _areaExplodeFraction; }
@@ -87,7 +85,6 @@ public class Chart
             }
         }
     }
-    internal static double _areaExplodeFraction;
 
     // Legend setting
     public static bool EnableLegend { get; set; }
@@ -97,84 +94,26 @@ public class Chart
     public static Color LegendFontColor { get; set; } = Colors.Black;
 
     // Legend border settings
+    internal static LinePattern legendborderstyle;
     public static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
-    internal static LinePattern legendborderstyle = LegendBorderStyle switch
-    {
-        BorderStyles.Solid => LinePattern.Solid,
-        BorderStyles.Dashed => LinePattern.Dashed,
-        BorderStyles.Dotted => LinePattern.Dotted,
-        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-        _ => LinePattern.Solid
-    };
     public static int LegendBorderSize { get; set; } = 1;
     public static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
+    internal static Orientation legendOrientation;
     public static Orientations LegendOrientation { get; set; } = Orientations.Vertical;
-    internal static Orientation legendOrientation = LegendOrientation switch
-    {
-        Orientations.Horizontal => Orientation.Horizontal,
-        _ => Orientation.Vertical
-    };
+
     public static Alignments LegendAlignment { get; set; } = Alignments.LowerRight;
-    internal static Alignment legendAlignment = LegendAlignment switch
-    {
-        Alignments.LowerCenter => Alignment.LowerCenter,
-        Alignments.LowerLeft => Alignment.LowerLeft,
-        Alignments.LowerRight => Alignment.LowerRight,
-        Alignments.MiddleCenter => Alignment.MiddleCenter,
-        Alignments.MiddleLeft => Alignment.MiddleLeft,
-        Alignments.MiddleRight => Alignment.MiddleRight,
-        Alignments.UpperCenter => Alignment.UpperCenter,
-        Alignments.UpperLeft => Alignment.UpperLeft,
-        Alignments.UpperRight => Alignment.UpperRight,
-        _ => Alignment.LowerRight
-    };
+    internal static Alignment legendAlignment;
 
     // Chart border settings
     public static bool EnableChartBorder { get; set; }
+    internal static LinePattern chartborderstyle;
     public static BorderStyles ChartBorderStyle { get; set; }
-    internal static LinePattern chartborderstyle = ChartBorderStyle switch
-    {
-        BorderStyles.Solid => LinePattern.Solid,
-        BorderStyles.Dashed => LinePattern.Dashed,
-        BorderStyles.Dotted => LinePattern.Dotted,
-        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-        _ => LinePattern.Solid
-    };
     public static int ChartBorderSize { get; set; } = 1;
     public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo change this to rgb color
 
     // Color Palette settings
+    internal static IPalette? colorPalette;
     public static ColorPalettes ColorPalette { get; set; } = ColorPalettes.Normal;
-
-    internal static IPalette? colorPalette = ColorPalette switch
-    {
-        ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
-        ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
-        ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
-        ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
-        ColorPalettes.Building => new ScottPlot.Palettes.Building(),
-        ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
-        ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
-        ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
-        ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
-        ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
-        ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
-        ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
-        ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
-        ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
-        ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
-        ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
-        ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
-        ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
-        ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
-        ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
-        ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
-        ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
-        ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
-        ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
-        ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
-        _ => new ScottPlot.Palettes.Category10()
-    };
 
     // Custom color palette
     private static string[]? _customColorPalette;

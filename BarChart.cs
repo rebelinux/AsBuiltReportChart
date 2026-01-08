@@ -20,22 +20,60 @@ public class Bar : Chart
                 // Set ScottPlot native color palette if not null
                 if (colorPalette is not null)
                 {
-                    myPlot.Add.Palette = colorPalette;
+                    myPlot.Add.Palette = colorPalette = ColorPalette switch
+                    {
+                        ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
+                        ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
+                        ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
+                        ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
+                        ColorPalettes.Building => new ScottPlot.Palettes.Building(),
+                        ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
+                        ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
+                        ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
+                        ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
+                        ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
+                        ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
+                        ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
+                        ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
+                        ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
+                        ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
+                        ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
+                        ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
+                        ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
+                        ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
+                        ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
+                        ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
+                        ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
+                        ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
+                        ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
+                        ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
+                        _ => new ScottPlot.Palettes.Category10()
+                    };
                 }
             }
 
-            myPlot.Axes.Bottom.Label.Text = LabelXAxis;
+            // Set X and Y axis label settings
+            myPlot.Axes.Bottom.Label.Text = AreaOrientation switch
+            {
+                Orientations.Horizontal => LabelYAxis,
+                Orientations.Vertical => LabelXAxis,
+                _ => ""
+            };
             myPlot.Axes.Bottom.Label.FontSize = AxisLabelFontSize;
             myPlot.Axes.Bottom.Label.ForeColor = AxisLabelFontColor;
             myPlot.Axes.Bottom.Label.Bold = AxisLabelFontBold;
             myPlot.Axes.Bottom.Label.FontName = FontName;
 
-            myPlot.Axes.Left.Label.Text = LabelYAxis;
+            myPlot.Axes.Left.Label.Text = AreaOrientation switch
+            {
+                Orientations.Horizontal => LabelXAxis,
+                Orientations.Vertical => LabelYAxis,
+                _ => ""
+            };
             myPlot.Axes.Left.Label.FontSize = AxisLabelFontSize;
             myPlot.Axes.Left.Label.ForeColor = AxisLabelFontColor;
             myPlot.Axes.Left.Label.Bold = AxisLabelFontBold;
             myPlot.Axes.Left.Label.FontName = FontName;
-
 
             // create bars
             var bars = new List<ScottPlot.Bar>();
@@ -46,7 +84,6 @@ public class Bar : Chart
                 if (colorPalette is not null)
                 {
                     bars.Add(new ScottPlot.Bar { Position = positionIndex++, Value = item, ValueBase = 0, FillColor = colorPalette.GetColor(bars.Count) });
-
                 }
             }
 
@@ -57,16 +94,35 @@ public class Bar : Chart
             ScottPlot.TickGenerators.NumericManual tickGen = new();
 
             // assign labels to each bar
-            for (var i = 0; i < bar.Bars.Count; i++)
+            if (AreaOrientation == Orientations.Vertical)
             {
-                // set bar value as label
-                bar.Bars[i].Label = values[i].ToString();
-                // set bar orientation
-                bar.Bars[i].Orientation = _areaOrientation;
-                // set ticks
-                tickGen.AddMajor(i, labels[i]);
+                myPlot.Axes.Bottom.TickGenerator = tickGen;
+                for (var i = 0; i < bar.Bars.Count; i++)
+                {
+                    // set bar value as label
+                    bar.Bars[i].Label = values[i].ToString();
+                    // set ticks
+                    tickGen.AddMajor(i, labels[i]);
+                }
             }
-            myPlot.Axes.Bottom.TickGenerator = tickGen;
+            else
+            {
+                double[] positions = new double[bar.Bars.Count];
+                for (var i = 0; i < bar.Bars.Count; i++)
+                {
+                    // set bar value as label
+                    bar.Bars[i].Label = values[i].ToString();
+                    positions[i] = i;
+                }
+                // set ticks for horizontal orientation
+                myPlot.Axes.Left.SetTicks(positions, labels);
+            }
+
+            bar.Horizontal = AreaOrientation switch
+            {
+                Orientations.Horizontal => true,
+                _ => false
+            };
 
 
             // hide unnecessary plot components
@@ -74,14 +130,9 @@ public class Bar : Chart
             myPlot.Axes.Top.IsVisible = false;
             myPlot.Axes.Right.IsVisible = false;
 
-            // tell the plot to autoscale with no padding beneath the bars
-            myPlot.Axes.Margins(bottom: 0);
-
             if (EnableLegend)
             {
-                // Show legend
-                myPlot.ShowLegend();
-
+                // Legend Font Properties
                 myPlot.Legend.FontName = FontName;
                 myPlot.Legend.FontSize = LegendFontSize;
                 myPlot.Legend.FontColor = LegendFontColor;
@@ -90,20 +141,51 @@ public class Bar : Chart
                 myPlot.Legend.OutlineColor = LegendBorderColor;
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = legendborderstyle;
+                myPlot.Legend.OutlinePattern = legendborderstyle = LegendBorderStyle switch
+                {
+                    BorderStyles.Solid => LinePattern.Solid,
+                    BorderStyles.Dashed => LinePattern.Dashed,
+                    BorderStyles.Dotted => LinePattern.Dotted,
+                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                    _ => LinePattern.Solid
+                };
 
-                myPlot.Legend.Orientation = legendOrientation;
+                myPlot.Legend.Orientation = legendOrientation = LegendOrientation switch
+                {
+                    Orientations.Horizontal => Orientation.Horizontal,
+                    _ => Orientation.Vertical
+                };
 
-                myPlot.Legend.Alignment = legendAlignment;
+                myPlot.Legend.Alignment = legendAlignment = LegendAlignment switch
+                {
+                    Alignments.LowerCenter => Alignment.LowerCenter,
+                    Alignments.LowerLeft => Alignment.LowerLeft,
+                    Alignments.LowerRight => Alignment.LowerRight,
+                    Alignments.MiddleCenter => Alignment.MiddleCenter,
+                    Alignments.MiddleLeft => Alignment.MiddleLeft,
+                    Alignments.MiddleRight => Alignment.MiddleRight,
+                    Alignments.UpperCenter => Alignment.UpperCenter,
+                    Alignments.UpperLeft => Alignment.UpperLeft,
+                    Alignments.UpperRight => Alignment.UpperRight,
+                    _ => Alignment.LowerRight
+                };
             }
 
             if (EnableChartBorder)
             {
                 myPlot.FigureBorder = new()
                 {
+                    // Set chart border properties
                     Color = ChartBorderColor,
                     Width = ChartBorderSize,
-                    Pattern = chartborderstyle
+                    Pattern = chartborderstyle = ChartBorderStyle switch
+                    {
+                        BorderStyles.Solid => LinePattern.Solid,
+                        BorderStyles.Dashed => LinePattern.Dashed,
+                        BorderStyles.Dotted => LinePattern.Dotted,
+                        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                        _ => LinePattern.Solid
+                    }
                 };
             }
 

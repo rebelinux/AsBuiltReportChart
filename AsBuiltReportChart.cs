@@ -13,7 +13,7 @@ namespace AsBuiltReportChart
             Chart.Title = "Best Practices";
             Chart.TitleFontBold = true;
             Chart.TitleFontSize = 18;
-            Chart.LabelXAxis = "Status";
+            Chart.LabelXAxis = "Values";
             Chart.LabelYAxis = "Count";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 20;
@@ -25,7 +25,7 @@ namespace AsBuiltReportChart
             Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
-            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
+            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787",];
             // Chart.ColorPalette = ColorPalettes.Nero;
 
             Chart.AreaOrientation = Orientations.Horizontal;
