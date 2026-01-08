@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="400">
+	<rect fill="white" width="600" height="400"/>
+	<clipPath id="cl_7">
+		<rect x="43.238281" y="30.953125" width="556.76172" height="327.10938"/>
+	</clipPath>
+	<g clip-path="url(#cl_7)">
+		<rect fill="#DFF0D0" x="68.545631" y="52.352814" width="106.55727" height="305.70969"/>
+		<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="68.545631" y="52.352814" width="106.55727" height="305.70969"/>
+		<text transform="translate(121.824 47.3528)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, 0, " y="-4.1601562, ">
+				17
+		</text>
+		<rect fill="#FFF4C7" x="201.74222" y="322.09665" width="106.55725" height="35.965851"/>
+		<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="201.74222" y="322.09665" width="106.55725" height="35.965851"/>
+		<text transform="translate(255.021 317.097)" font-size="12" font-family="DejaVu Serif" x="-3.8173828, " y="-4.1601562, ">
+				2
+		</text>
+		<rect fill="#FEDDD7" x="334.93881" y="70.335724" width="106.55725" height="287.72678"/>
+		<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="334.93881" y="70.335724" width="106.55725" height="287.72678"/>
+		<text transform="translate(388.217 65.3357)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, 0, " y="-4.1601562, ">
+				16
+		</text>
+		<rect fill="#878787" x="468.13538" y="340.07959" width="106.55725" height="17.98291"/>
+		<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="468.13538" y="340.07959" width="106.55725" height="17.98291"/>
+		<text transform="translate(521.414 335.08)" font-size="12" font-family="DejaVu Serif" x="-3.8173828, " y="-4.1601562, ">
+				1
+		</text>
+	</g>
+	<text transform="translate(321.619 396)" font-size="12" font-family="DejaVu Serif" x="-19.453125, -11.232422, -6.4101562, 0.74414062, 5.5664062, 13.294922, " y="-4.1601562, ">
+			Status
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M121.824 358.062L121.824 362.062"/>
+	<text transform="translate(121.824 364.062)" font-size="12" font-family="DejaVu Serif" x="-21.164062, -13.089844, -5.9355469, 0.22265625, 6.3808594, 13.482422, " y="9.8085938, ">
+			Passed
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M255.021 358.062L255.021 362.062"/>
+	<text transform="translate(255.021 364.062)" font-size="12" font-family="DejaVu Serif" x="-50.771484, -40.658203, -32.929688, -25.775391, -18.09375, -14.255859, -7.1542969, -3.3398438, 1.4824219, 8.7070312, 12.521484, 20.203125, 27.304688, 32.126953, 39.228516, 45.949219, " y="9.8085938, ">
+			Unable to detect
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M388.217 358.062L388.217 362.062"/>
+	<text transform="translate(388.217 364.062)" font-size="12" font-family="DejaVu Serif" x="-53.458008, -42.958008, -35.733398, -30.911133, -27.09668, -22.356445, -10.977539, -3.2958984, 0.54199219, 7.6435547, 19.022461, 26.124023, 33.852539, 38.674805, 45.776367, " y="9.8085938, ">
+			Not Implemented
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M521.414 358.062L521.414 362.062"/>
+	<text transform="translate(521.414 364.062)" font-size="12" font-family="DejaVu Serif" x="-35.625, -27.404297, -19.675781, -11.994141, -4.3125, 1.4238281, 8.5253906, 14.683594, 20.841797, 27.943359, " y="9.8085938, ">
+			Suppressed
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 358.062L600 358.062"/>
+	<text transform="matrix(0 -1 1 0 4 194.508)" font-size="12" font-family="DejaVu Serif" x="-18.342773, -9.1611328, -1.9365234, 5.7919922, 13.520508, " y="9.8085938, ">
+			Count
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 358.062L39.2383 358.062"/>
+	<text transform="translate(34.2383 358.062)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, " y="2.8242188, ">
+			0
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 322.097L39.2383 322.097"/>
+	<text transform="translate(34.2383 322.097)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, " y="2.8242188, ">
+			2
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 286.131L39.2383 286.131"/>
+	<text transform="translate(34.2383 286.131)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, " y="2.8242188, ">
+			4
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 250.165L39.2383 250.165"/>
+	<text transform="translate(34.2383 250.165)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, " y="2.8242188, ">
+			6
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 214.199L39.2383 214.199"/>
+	<text transform="translate(34.2383 214.199)" font-size="12" font-family="DejaVu Serif" x="-7.6347656, " y="2.8242188, ">
+			8
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 178.233L39.2383 178.233"/>
+	<text transform="translate(34.2383 178.233)" font-size="12" font-family="DejaVu Serif" x="-15.269531, -7.6347656, " y="2.8242188, ">
+			10
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 142.267L39.2383 142.267"/>
+	<text transform="translate(34.2383 142.267)" font-size="12" font-family="DejaVu Serif" x="-15.269531, -7.6347656, " y="2.8242188, ">
+			12
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 106.302L39.2383 106.302"/>
+	<text transform="translate(34.2383 106.302)" font-size="12" font-family="DejaVu Serif" x="-15.269531, -7.6347656, " y="2.8242188, ">
+			14
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 70.3357L39.2383 70.3357"/>
+	<text transform="translate(34.2383 70.3357)" font-size="12" font-family="DejaVu Serif" x="-15.269531, -7.6347656, " y="2.8242188, ">
+			16
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 34.3699L39.2383 34.3699"/>
+	<text transform="translate(34.2383 34.3699)" font-size="12" font-family="DejaVu Serif" x="-15.269531, -7.6347656, " y="2.8242188, ">
+			18
+	</text>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 350.869L41.2383 350.869"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 343.676L41.2383 343.676"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 336.483L41.2383 336.483"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 329.29L41.2383 329.29"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 314.903L41.2383 314.903"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 307.71L41.2383 307.71"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 300.517L41.2383 300.517"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 293.324L41.2383 293.324"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 278.938L41.2383 278.938"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 271.744L41.2383 271.744"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 264.551L41.2383 264.551"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 257.358L41.2383 257.358"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 242.972L41.2383 242.972"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 235.779L41.2383 235.779"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 228.585L41.2383 228.585"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 221.392L41.2383 221.392"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 207.006L41.2383 207.006"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 199.813L41.2383 199.813"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 192.62L41.2383 192.62"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 185.426L41.2383 185.426"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 171.04L41.2383 171.04"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 163.847L41.2383 163.847"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 156.654L41.2383 156.654"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 149.461L41.2383 149.461"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 135.074L41.2383 135.074"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 127.881L41.2383 127.881"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 120.688L41.2383 120.688"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 113.495L41.2383 113.495"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 99.1084L41.2383 99.1084"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 91.9152L41.2383 91.9152"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 84.7221L41.2383 84.7221"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 77.5289L41.2383 77.5289"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 63.1425L41.2383 63.1425"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 55.9494L41.2383 55.9494"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 48.7562L41.2383 48.7562"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 41.563L41.2383 41.563"/>
+	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M43.2383 358.062L43.2383 30.9531"/>
+	<text transform="translate(321.619 30.9531)" font-size="18" font-family="DejaVu Serif" x="-65.280762, -52.053223, -41.400879, -32.163574, -24.930176, -19.208496, -7.097168, 1.5073242, 12.23877, 22.319824, 29.553223, 35.310059, 45.391113, 56.043457, " y="-6.2402344, ">
+			Best Practices
+	</text>
+	<path fill="none" stroke="#006400" stroke-width="2" stroke-miterlimit="4" d="M1 399L1 1L599 1L599 399L1 399"/>
+</svg>

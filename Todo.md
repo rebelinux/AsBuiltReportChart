@@ -1,4 +1,4 @@
-- [ ] Add chart border option
+- [x] Add chart border option
     - [x] Border color
     - [x]  Border width
     - [x]  Border line style (solid, dashed etc)
@@ -9,9 +9,11 @@
     - [x] legend font properties
     - [x] legend box line properties (No Line)
 
-- [ ] Add Color palette
+- [x] Add Color palette
     - [x] ScottPlot.Palette
-    - [ ] Custom Color palette
+    - [x] Custom Color palette
+
+- [ ] Add per image format save support
 
 ```c#
 string[] customColors = { "#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898" , "#5e9584", "#458370", "#2a715d", "#005f4b"};

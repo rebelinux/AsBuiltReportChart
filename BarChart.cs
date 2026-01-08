@@ -2,7 +2,7 @@
 using AsBuiltReportChart.Enums;
 namespace AsBuiltReportChart;
 
-public class Pie : Chart
+public class Bar : Chart
 {
     public static void Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
     {
@@ -13,41 +13,79 @@ public class Pie : Chart
             if (CustomColorPalette is not null and { Length: > 0 })
             {
                 // Set ScottPlot custom color palette
-                myPlot.Add.Palette = new ScottPlot.Palettes.Custom(CustomColorPalette);
+                myPlot.Add.Palette = colorPalette = new ScottPlot.Palettes.Custom(CustomColorPalette);
             }
             else
             {
-                // Set ScottPlot native color palette
+                // Set ScottPlot native color palette if not null
                 if (colorPalette is not null)
                 {
                     myPlot.Add.Palette = colorPalette;
                 }
             }
 
-            var pie = myPlot.Add.Pie(values);
-            pie.ExplodeFraction = _areaExplodeFraction;
-            pie.SliceLabelDistance = _labelDistance;
+            myPlot.Axes.Bottom.Label.Text = LabelXAxis;
+            myPlot.Axes.Bottom.Label.FontSize = AxisLabelFontSize;
+            myPlot.Axes.Bottom.Label.ForeColor = AxisLabelFontColor;
+            myPlot.Axes.Bottom.Label.Bold = AxisLabelFontBold;
+            myPlot.Axes.Bottom.Label.FontName = FontName;
 
-            // set each slice value to its label
-            for (var i = 0; i < pie.Slices.Count; i++)
+            myPlot.Axes.Left.Label.Text = LabelYAxis;
+            myPlot.Axes.Left.Label.FontSize = AxisLabelFontSize;
+            myPlot.Axes.Left.Label.ForeColor = AxisLabelFontColor;
+            myPlot.Axes.Left.Label.Bold = AxisLabelFontBold;
+            myPlot.Axes.Left.Label.FontName = FontName;
+
+
+            // create bars
+            var bars = new List<ScottPlot.Bar>();
+            // assign values and colors to each bar
+            double positionIndex = 0;
+            foreach (var item in values)
             {
-                pie.Slices[i].LabelText = values[i].ToString();
-                pie.Slices[i].LabelFontSize = LabelFontSize;
-                pie.Slices[i].LabelFontColor = LabelFontColor;
-                pie.Slices[i].LabelBold = LabelBold;
-
-                if (EnableLegend)
+                if (colorPalette is not null)
                 {
-                    pie.Slices[i].LegendText = labels[i];
+                    bars.Add(new ScottPlot.Bar { Position = positionIndex++, Value = item, ValueBase = 0, FillColor = colorPalette.GetColor(bars.Count) });
+
                 }
             }
 
+            // add bars to plot
+            var bar = myPlot.Add.Bars(bars);
+
+            // set each slice value to its label
+            ScottPlot.TickGenerators.NumericManual tickGen = new();
+
+            // assign labels to each bar
+            for (var i = 0; i < bar.Bars.Count; i++)
+            {
+                // set bar value as label
+                bar.Bars[i].Label = values[i].ToString();
+                // set bar orientation
+                bar.Bars[i].Orientation = _areaOrientation;
+                // set ticks
+                tickGen.AddMajor(i, labels[i]);
+            }
+            myPlot.Axes.Bottom.TickGenerator = tickGen;
+
+
             // hide unnecessary plot components
-            myPlot.Axes.Frameless();
             myPlot.HideGrid();
+            myPlot.Axes.Top.IsVisible = false;
+            myPlot.Axes.Right.IsVisible = false;
+
+            // tell the plot to autoscale with no padding beneath the bars
+            myPlot.Axes.Margins(bottom: 0);
 
             if (EnableLegend)
             {
+                // Show legend
+                myPlot.ShowLegend();
+
+                myPlot.Legend.FontName = FontName;
+                myPlot.Legend.FontSize = LegendFontSize;
+                myPlot.Legend.FontColor = LegendFontColor;
+
                 // Legend box Style Properties
                 myPlot.Legend.OutlineColor = LegendBorderColor;
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
@@ -76,6 +114,7 @@ public class Pie : Chart
                 myPlot.Axes.Title.Label.FontSize = TitleFontSize;
                 myPlot.Axes.Title.Label.ForeColor = TitleFontColor;
                 myPlot.Axes.Title.Label.Bold = TitleFontBold;
+                myPlot.Axes.Title.Label.FontName = FontName;
             }
 
             // Set filename

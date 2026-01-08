@@ -6,14 +6,17 @@ namespace AsBuiltReportChart
     {
         public static void Main(string[] args)
         {
-            double[] values = [100, 7, 40, 18];
-            string[] labels = ["Instances Capacity", "Used Instances", "New Instances", "Rental Instances"];
+            double[] values = [17, 2, 16, 1];
+            string[] labels = ["Passed", "Unable to detect", "Not Implemented", "Suppressed"];
 
             Chart.EnableLegend = true;
-            Chart.Title = "Instance License Usage";
+            Chart.Title = "Best Practices";
+            Chart.TitleFontBold = true;
+            Chart.TitleFontSize = 18;
+            Chart.LabelXAxis = "Status";
+            Chart.LabelYAxis = "Count";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 20;
-            Chart.TitleFontColor = ScottPlot.Color.FromColor(System.Drawing.Color.DarkGreen);
             Chart.ChartBorderStyle = BorderStyles.Dotted;
             Chart.ChartBorderColor = ScottPlot.Color.FromColor(System.Drawing.Color.DarkGreen);
             Chart.ChartBorderSize = 2;
@@ -22,10 +25,17 @@ namespace AsBuiltReportChart
             Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
-            Chart.CustomColorPalette = ["#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
+            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
             // Chart.ColorPalette = ColorPalettes.Nero;
 
-            Pie.Chart(values, labels, width: 600, height: 400);
+            Chart.AreaOrientation = Orientations.Horizontal;
+
+            Chart.Format = "svg";
+
+            Pie.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
+
+            Bar.Chart(values, labels, width: 600, height: 400, filename: "BarChartExample");
+
         }
     }
 }
