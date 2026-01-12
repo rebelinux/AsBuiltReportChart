@@ -55,3 +55,12 @@ namespace AsBuiltReportChart.Enums
         Tsitsulin
     }
 }
+
+public enum Formats
+{
+    png,
+    jpg,
+    jpeg,
+    bmp,
+    svg
+}

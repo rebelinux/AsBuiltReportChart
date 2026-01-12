@@ -25,16 +25,20 @@ namespace AsBuiltReportChart
             Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
-            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787",];
-            // Chart.ColorPalette = ColorPalettes.Nero;
+            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
+            Chart.EnableCustomColorPalette = true;
+            // Chart.ColorPalette = ColorPalettes.LightOcean;
 
             Chart.AreaOrientation = Orientations.Horizontal;
 
-            Chart.Format = "svg";
+            Pie myPie = new();
+            Bar myBar = new();
 
-            Pie.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
+            Chart.Format = Formats.png;
 
-            Bar.Chart(values, labels, width: 600, height: 400, filename: "BarChartExample");
+            myPie.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
+
+            myBar.Chart(values, labels, width: 600, height: 400, filename: "BarChartExample");
 
         }
     }

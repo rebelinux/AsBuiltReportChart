@@ -1,30 +1,16 @@
 using ScottPlot;
+using System.Text.RegularExpressions;
 using AsBuiltReportChart.Enums;
 namespace AsBuiltReportChart;
 
-public class Chart
+public partial class Chart
 {
     // Save settings
-    internal static string _format = "png";
-    public static string Format
-    {
-        get { return _format; }
-        set
-        {
-            if (value is "png" or "jpg" or "jpeg" or "bmp" or "svg")
-            {
-                _format = value;
-            }
-            else
-            {
-                throw new ArgumentException("Error: Format value must be a valid image format (png, jpg, jpeg, bmp, svg).");
-            }
-        }
-    }
+    public static Formats Format { get; set; } = Formats.png;
 
     // Title setting
     public static string? Title { get; set; }
-    public static bool TitleFontBold { get; set; } = false;
+    public static bool TitleFontBold { get; set; }
     public static int TitleFontSize { get; set; } = 14;
     public static Color TitleFontColor { get; set; } = Colors.Black;
 
@@ -75,13 +61,13 @@ public class Chart
         get { return _areaExplodeFraction; }
         set
         {
-            if (value is >= 0.1 and <= 0.5)
+            if (value is >= 0.0 and <= 0.5)
             {
                 _areaExplodeFraction = value;
             }
             else
             {
-                throw new ArgumentException("Error: AreaExplodeFraction value range must be from 0.1 to 0.5.");
+                throw new ArgumentException("Error: AreaExplodeFraction value range must be from 0.0 to 0.5.");
             }
         }
     }
@@ -94,42 +80,118 @@ public class Chart
     public static Color LegendFontColor { get; set; } = Colors.Black;
 
     // Legend border settings
-    internal static LinePattern legendborderstyle;
     public static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
     public static int LegendBorderSize { get; set; } = 1;
     public static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
-    internal static Orientation legendOrientation;
     public static Orientations LegendOrientation { get; set; } = Orientations.Vertical;
 
     public static Alignments LegendAlignment { get; set; } = Alignments.LowerRight;
-    internal static Alignment legendAlignment;
 
     // Chart border settings
     public static bool EnableChartBorder { get; set; }
-    internal static LinePattern chartborderstyle;
     public static BorderStyles ChartBorderStyle { get; set; }
     public static int ChartBorderSize { get; set; } = 1;
     public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo change this to rgb color
 
     // Color Palette settings
     internal static IPalette? colorPalette;
-    public static ColorPalettes ColorPalette { get; set; } = ColorPalettes.Normal;
-
-    // Custom color palette
-    private static string[]? _customColorPalette;
-    public static string[] CustomColorPalette
+    public static ColorPalettes? ColorPalette
     {
-        get
+        get => colorPalette switch
         {
-            return _customColorPalette ?? [];
-        }
+            ScottPlot.Palettes.Amber => Enums.ColorPalettes.Amber,
+            ScottPlot.Palettes.Category10 => Enums.ColorPalettes.Category10,
+            ScottPlot.Palettes.Category20 => Enums.ColorPalettes.Category20,
+            ScottPlot.Palettes.Aurora => Enums.ColorPalettes.Aurora,
+            ScottPlot.Palettes.Building => Enums.ColorPalettes.Building,
+            ScottPlot.Palettes.ColorblindFriendly => Enums.ColorPalettes.ColorblindFriendly,
+            ScottPlot.Palettes.ColorblindFriendlyDark => Enums.ColorPalettes.ColorblindFriendlyDark,
+            ScottPlot.Palettes.Dark => Enums.ColorPalettes.Dark,
+            ScottPlot.Palettes.DarkPastel => Enums.ColorPalettes.DarkPastel,
+            ScottPlot.Palettes.Frost => Enums.ColorPalettes.Frost,
+            ScottPlot.Palettes.LightOcean => Enums.ColorPalettes.LightOcean,
+            ScottPlot.Palettes.LightSpectrum => Enums.ColorPalettes.LightSpectrum,
+            ScottPlot.Palettes.Microcharts => Enums.ColorPalettes.Microcharts,
+            ScottPlot.Palettes.Nero => Enums.ColorPalettes.Nero,
+            ScottPlot.Palettes.Nord => Enums.ColorPalettes.Nord,
+            ScottPlot.Palettes.Normal => Enums.ColorPalettes.Normal,
+            ScottPlot.Palettes.OneHalf => Enums.ColorPalettes.OneHalf,
+            ScottPlot.Palettes.OneHalfDark => Enums.ColorPalettes.OneHalfDark,
+            ScottPlot.Palettes.PastelWheel => Enums.ColorPalettes.PastelWheel,
+            ScottPlot.Palettes.Penumbra => Enums.ColorPalettes.Penumbra,
+            ScottPlot.Palettes.PolarNight => Enums.ColorPalettes.PolarNight,
+            ScottPlot.Palettes.Redness => Enums.ColorPalettes.Redness,
+            ScottPlot.Palettes.SnowStorm => Enums.ColorPalettes.SnowStorm,
+            ScottPlot.Palettes.SummerSplash => Enums.ColorPalettes.SummerSplash,
+            ScottPlot.Palettes.Tsitsulin => Enums.ColorPalettes.Tsitsulin,
+            _ => Enums.ColorPalettes.Normal
+        };
         set
         {
-            if (value.Length < 3)
+            colorPalette = value switch
             {
-                throw new ArgumentException("Error: CustomColorPalette must contain at least 3 colors.");
+                ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
+                ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
+                ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
+                ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
+                ColorPalettes.Building => new ScottPlot.Palettes.Building(),
+                ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
+                ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
+                ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
+                ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
+                ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
+                ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
+                ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
+                ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
+                ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
+                ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
+                ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
+                ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
+                ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
+                ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
+                ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
+                ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
+                ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
+                ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
+                ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
+                ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
+                _ => new ScottPlot.Palettes.Category10()
+            };
+        }
+    }
+
+    // Custom color palette
+    internal static string[]? _customColorPalette;
+    public static string[] CustomColorPalette
+    {
+        get => _customColorPalette ?? [];
+        set
+        {
+            if (value is not null or [])
+            {
+                foreach (var color in value)
+                {
+                    if (!IsValidHexColor(color))
+                    {
+                        throw new ArgumentException($"Error: '{color}' is not a valid hex color code.");
+                    }
+                }
+            } else
+            {
+                throw new ArgumentException("Error: CustomColorPalette cannot be null or empty when setting custom colors.");
             }
             _customColorPalette = value;
         }
     }
+    public static bool EnableCustomColorPalette { get; set; }
+
+    public static bool IsValidHexColor(string hexCode)
+    {
+        // Regex for #RGB, #RRGGBB, #RGBA, or #RRGGBBAA formats (case-insensitive)
+        var regex = MyRegex();
+        return regex.IsMatch(hexCode);
+    }
+
+    [GeneratedRegex("^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")]
+    private static partial Regex MyRegex();
 }

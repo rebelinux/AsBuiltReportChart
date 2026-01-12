@@ -4,51 +4,24 @@ namespace AsBuiltReportChart;
 
 public class Pie : Chart
 {
-    public static void Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
+    public Pie() { }
+    public void Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
     {
         if (values.Length == labels.Length)
         {
             Plot myPlot = new();
 
-            if (CustomColorPalette is not null and { Length: > 0 })
+            if (_customColorPalette != null && EnableCustomColorPalette)
             {
                 // Set ScottPlot custom color palette
-                myPlot.Add.Palette = new ScottPlot.Palettes.Custom(CustomColorPalette);
+                myPlot.Add.Palette = new ScottPlot.Palettes.Custom(_customColorPalette);
             }
             else
             {
                 // Set ScottPlot native color palette
                 if (colorPalette is not null)
                 {
-                    myPlot.Add.Palette = colorPalette = ColorPalette switch
-                    {
-                        ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
-                        ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
-                        ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
-                        ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
-                        ColorPalettes.Building => new ScottPlot.Palettes.Building(),
-                        ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
-                        ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
-                        ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
-                        ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
-                        ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
-                        ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
-                        ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
-                        ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
-                        ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
-                        ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
-                        ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
-                        ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
-                        ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
-                        ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
-                        ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
-                        ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
-                        ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
-                        ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
-                        ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
-                        ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
-                        _ => new ScottPlot.Palettes.Category10()
-                    };
+                    myPlot.Add.Palette = colorPalette;
                 }
             }
 
@@ -80,7 +53,7 @@ public class Pie : Chart
                 myPlot.Legend.OutlineColor = LegendBorderColor;
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = legendborderstyle = LegendBorderStyle switch
+                myPlot.Legend.OutlinePattern = LegendBorderStyle switch
                 {
                     BorderStyles.Solid => LinePattern.Solid,
                     BorderStyles.Dashed => LinePattern.Dashed,
@@ -89,13 +62,13 @@ public class Pie : Chart
                     _ => LinePattern.Solid
                 };
 
-                myPlot.Legend.Orientation = legendOrientation = LegendOrientation switch
+                myPlot.Legend.Orientation = LegendOrientation switch
                 {
                     Orientations.Horizontal => Orientation.Horizontal,
                     _ => Orientation.Vertical
                 };
 
-                myPlot.Legend.Alignment = legendAlignment = LegendAlignment switch
+                myPlot.Legend.Alignment = LegendAlignment switch
                 {
                     Alignments.LowerCenter => Alignment.LowerCenter,
                     Alignments.LowerLeft => Alignment.LowerLeft,
@@ -116,7 +89,7 @@ public class Pie : Chart
                 {
                     Color = ChartBorderColor,
                     Width = ChartBorderSize,
-                    Pattern = chartborderstyle = ChartBorderStyle switch
+                    Pattern = ChartBorderStyle switch
                     {
                         BorderStyles.Solid => LinePattern.Solid,
                         BorderStyles.Dashed => LinePattern.Dashed,
@@ -137,19 +110,21 @@ public class Pie : Chart
             }
 
             // Set filename
-            switch (_format.ToLower())
+            switch (Format)
             {
-                case "png":
+                case Formats.png:
                     myPlot.SavePng($"{filename}.png", width, height);
                     break;
-                case "jpg":
-                case "jpeg":
+                case Formats.jpg:
                     myPlot.SaveJpeg($"{filename}.jpg", width, height);
                     break;
-                case "bmp":
+                case Formats.jpeg:
+                    myPlot.SaveJpeg($"{filename}.jpg", width, height);
+                    break;
+                case Formats.bmp:
                     myPlot.SaveBmp($"{filename}.bmp", width, height);
                     break;
-                case "svg":
+                case Formats.svg:
                     myPlot.SaveSvg($"{filename}.svg", width, height);
                     break;
                 default:
