@@ -176,7 +176,8 @@ public partial class Chart
                         throw new ArgumentException($"Error: '{color}' is not a valid hex color code.");
                     }
                 }
-            } else
+            }
+            else
             {
                 throw new ArgumentException("Error: CustomColorPalette cannot be null or empty when setting custom colors.");
             }
