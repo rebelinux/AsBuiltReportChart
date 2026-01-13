@@ -1,3 +1,4 @@
+using ScottPlot;
 using System.Management.Automation;
 
 namespace AsBuiltReportChart.PowerShell
@@ -19,6 +20,15 @@ namespace AsBuiltReportChart.PowerShell
         public string? Title { get; set; }
 
         [Parameter(Mandatory = false)]
+        public bool TitleFontBold { get; set; }
+
+        [Parameter(Mandatory = false)]
+        public int TitleFontSize { get; set; } = 14;
+
+        [Parameter(Mandatory = false)]
+        public Color TitleFontColor { get; set; }
+
+        [Parameter(Mandatory = false)]
         public bool EnableLegend { get; set; }
 
         [Parameter(Mandatory = false)]
@@ -34,7 +44,7 @@ namespace AsBuiltReportChart.PowerShell
         public double AreaExplodeFraction { get; set; }
 
         [Parameter(Mandatory = false)]
-        public ScottPlot.Color ChartBorderColor { get; set; }
+        public Color ChartBorderColor { get; set; }
 
         [Parameter(Mandatory = false)]
         public int ChartBorderSize { get; set; }
@@ -49,7 +59,7 @@ namespace AsBuiltReportChart.PowerShell
         public int LegendFontSize { get; set; }
 
         [Parameter(Mandatory = false)]
-        public ScottPlot.Color LegendFontColor { get; set; }
+        public Color LegendFontColor { get; set; }
 
         [Parameter(Mandatory = false)]
         public Enums.BorderStyles LegendBorderStyle { get; set; }
@@ -58,7 +68,7 @@ namespace AsBuiltReportChart.PowerShell
         public int LegendBorderSize { get; set; }
 
         [Parameter(Mandatory = false)]
-        public ScottPlot.Color LegendBorderColor { get; set; }
+        public Color LegendBorderColor { get; set; }
 
         [Parameter(Mandatory = false)]
         public Enums.ColorPalettes ColorPalette { get; set; } = Enums.ColorPalettes.Category10;
@@ -69,6 +79,23 @@ namespace AsBuiltReportChart.PowerShell
         [Parameter(Mandatory = false)]
         public string[]? CustomColorPalette { get; set; }
 
+        [Parameter(Mandatory = false)]
+        public string FontName { get; set; } = "Arial";
+
+        // Label Font settings
+        [Parameter(Mandatory = false)]
+        public int LabelFontSize { get; set; } = 14;
+
+        [Parameter(Mandatory = false)]
+        public Color LabelFontColor { get; set; } = Colors.Black;
+
+        [Parameter(Mandatory = false)]
+        public bool LabelBold { get; set; }
+
+        // this set the distance of the labels from the chart center (Pie Chart)
+        [Parameter(Mandatory = false)]
+        public double LabelDistance { get; set; } = 0.6;
+
         protected override void ProcessRecord()
         {
             if (Values != null && Labels != null)
@@ -76,6 +103,7 @@ namespace AsBuiltReportChart.PowerShell
                 if (EnableLegend)
                 {
                     Chart.EnableLegend = EnableLegend;
+                    // Legend box settings
                     Chart.LegendOrientation = LegendOrientation;
                     Chart.LegendAlignment = LegendAlignment;
 

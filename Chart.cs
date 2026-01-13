@@ -22,17 +22,17 @@ public partial class Chart
     public static Color LabelFontColor { get; set; } = Colors.Black;
     public static bool LabelBold { get; set; }
 
-    // Set font for the X and Y axis labels
+    // Set font for the X and Y axis labels (Bar Chart)
     public static string LabelYAxis { get; set; } = "Count";
     public static string LabelXAxis { get; set; } = "Values";
 
 
-    // Bar Axes Font settings
+    // Bar Axes Font settings (Bar Chart)
     public static int AxisLabelFontSize { get; set; } = 12;
     public static Color AxisLabelFontColor { get; set; } = Colors.Black;
     public static bool AxisLabelFontBold { get; set; }
 
-    // this set the distance of the labels from the chart center
+    // this set the distance of the labels from the chart center (Pie Chart)
     internal static double _labelDistance = 0.6;
     public static double LabelDistance
     {
@@ -50,11 +50,11 @@ public partial class Chart
         }
     }
 
-    // this set the orientation chart area 
+    // this set the orientation chart area  (Bar Chart)
     public static Orientations AreaOrientation { get; set; } = Orientations.Vertical;
 
 
-    // this set the distance of the chart area elements
+    // this set the distance of the chart area elements  (Pie Chart)
     internal static double _areaExplodeFraction;
     public static double AreaExplodeFraction
     {

@@ -1,0 +1,9 @@
+steps:
+  - name: Checkout
+    uses: actions/checkout@v6
+
+  - name: .NET Lint
+    uses: zyactions/dotnet-lint@v1
+    with:
+      workspace: AsBuiltReportChart.csproj
+      implicit-restore: true

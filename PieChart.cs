@@ -11,10 +11,18 @@ public class Pie : Chart
         {
             Plot myPlot = new();
 
-            if (_customColorPalette != null && EnableCustomColorPalette)
+            if (EnableCustomColorPalette)
             {
-                // Set ScottPlot custom color palette
-                myPlot.Add.Palette = new ScottPlot.Palettes.Custom(_customColorPalette);
+
+                if (_customColorPalette is not null and not [] && _customColorPalette.Length > 0)
+                {
+                    myPlot.Add.Palette = new ScottPlot.Palettes.Custom(_customColorPalette);
+                }
+                else
+                {
+                    throw new Exception("CustomColorPalette is empty. Please provide valid color values.");
+                }
+
             }
             else
             {
@@ -49,6 +57,11 @@ public class Pie : Chart
 
             if (EnableLegend)
             {
+                // Legend Font Properties
+                myPlot.Legend.FontName = FontName;
+                myPlot.Legend.FontSize = LegendFontSize;
+                myPlot.Legend.FontColor = LegendFontColor;
+
                 // Legend box Style Properties
                 myPlot.Legend.OutlineColor = LegendBorderColor;
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
