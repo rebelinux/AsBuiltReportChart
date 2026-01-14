@@ -21,7 +21,7 @@ namespace AsBuiltReportChart
             Chart.LabelFontSize = 14;
             Chart.LabelFontColor = BasicColors.Red;
             Chart.ChartBorderStyle = BorderStyles.Dotted;
-            Chart.ChartBorderColor =  BasicColors.DarkGreen;
+            Chart.ChartBorderColor = BasicColors.DarkGreen;
             Chart.ChartBorderSize = 2;
             Chart.EnableChartBorder = true;
             Chart.LegendOrientation = Orientations.Vertical;
@@ -35,7 +35,6 @@ namespace AsBuiltReportChart
 
             Pie myPie = new();
             Bar myBar = new();
-
             Chart.Format = Formats.png;
 
             myPie.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
