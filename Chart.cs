@@ -5,32 +5,26 @@ namespace AsBuiltReportChart;
 
 public partial class Chart
 {
-    // Save settings
+    // Save settings (All Charts)
     public static Formats Format { get; set; } = Formats.png;
 
-    // Title setting
+    // Title setting  (All Charts)
     public static string? Title { get; set; }
     public static bool TitleFontBold { get; set; }
     public static int TitleFontSize { get; set; } = 14;
-    public static Color TitleFontColor { get; set; } = Colors.Black;
+    public static BasicColors TitleFontColor { get; set; } = BasicColors.Black;
 
-    // Global Font settings
+    // Global Font settings  (All Charts)
     public static string FontName { get; set; } = "Arial";
 
-    // Label Font settings
+    // Label Font settings  (All Charts)
     public static int LabelFontSize { get; set; } = 14;
-    public static Color LabelFontColor { get; set; } = Colors.Black;
+    public static BasicColors LabelFontColor { get; set; } = BasicColors.Black;
     public static bool LabelBold { get; set; }
 
     // Set font for the X and Y axis labels (Bar Chart)
     public static string LabelYAxis { get; set; } = "Count";
     public static string LabelXAxis { get; set; } = "Values";
-
-
-    // Bar Axes Font settings (Bar Chart)
-    public static int AxisLabelFontSize { get; set; } = 12;
-    public static Color AxisLabelFontColor { get; set; } = Colors.Black;
-    public static bool AxisLabelFontBold { get; set; }
 
     // this set the distance of the labels from the chart center (Pie Chart)
     internal static double _labelDistance = 0.6;
@@ -53,7 +47,6 @@ public partial class Chart
     // this set the orientation chart area  (Bar Chart)
     public static Orientations AreaOrientation { get; set; } = Orientations.Vertical;
 
-
     // this set the distance of the chart area elements  (Pie Chart)
     internal static double _areaExplodeFraction;
     public static double AreaExplodeFraction
@@ -72,28 +65,28 @@ public partial class Chart
         }
     }
 
-    // Legend setting
+    // Legend setting (Pie Chart)
     public static bool EnableLegend { get; set; }
 
-    // Legend Font settings
+    // Legend Font settings (Pie Chart)
     public static int LegendFontSize { get; set; } = 12;
-    public static Color LegendFontColor { get; set; } = Colors.Black;
+    public static BasicColors LegendFontColor { get; set; } = BasicColors.Black;
 
-    // Legend border settings
+    // Legend border settings (Pie Chart)
     public static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
     public static int LegendBorderSize { get; set; } = 1;
-    public static Color LegendBorderColor { get; set; } = Colors.Black; // Todo change this to rgb color
+    public static BasicColors LegendBorderColor { get; set; } = BasicColors.Black; // Todo change this to rgb color
     public static Orientations LegendOrientation { get; set; } = Orientations.Vertical;
 
     public static Alignments LegendAlignment { get; set; } = Alignments.LowerRight;
 
-    // Chart border settings
+    // Chart border settings (All Charts)
     public static bool EnableChartBorder { get; set; }
     public static BorderStyles ChartBorderStyle { get; set; }
     public static int ChartBorderSize { get; set; } = 1;
-    public static Color ChartBorderColor { get; set; } = Colors.Black;  // Todo change this to rgb color
+    public static BasicColors ChartBorderColor { get; set; } = BasicColors.Black;  // Todo change this to rgb color
 
-    // Color Palette settings
+    // Color Palette settings (All Charts)
     internal static IPalette? colorPalette;
     public static ColorPalettes? ColorPalette
     {
@@ -160,7 +153,7 @@ public partial class Chart
         }
     }
 
-    // Custom color palette
+    // Custom color palette (All Charts)
     internal static string[]? _customColorPalette;
     public static string[] CustomColorPalette
     {
@@ -195,4 +188,25 @@ public partial class Chart
 
     [GeneratedRegex("^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")]
     private static partial Regex MyRegex();
+
+    internal static readonly IReadOnlyDictionary<BasicColors, Color> ColorMap = new Dictionary<BasicColors, Color>()
+    {
+        { BasicColors.Black,  Colors.Black },
+        { BasicColors.White,  Colors.White },
+        { BasicColors.Red,  Colors.Red },
+        { BasicColors.Yellow,  Colors.Yellow },
+        { BasicColors.Green,  Colors.Green },
+        { BasicColors.Brown,  Colors.Brown },
+        { BasicColors.Orange,  Colors.Orange },
+        { BasicColors.Pink,  Colors.Pink },
+        { BasicColors.Purple,  Colors.Purple },
+        { BasicColors.Gray,  Colors.Gray },
+        { BasicColors.DarkBlue,  Colors.DarkBlue },
+        { BasicColors.DarkGreen,  Colors.DarkGreen },
+    };
+
+    public static Color GetDrawingColor(BasicColors color)
+    {
+        return ColorMap[color];
+    }
 }

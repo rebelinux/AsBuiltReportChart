@@ -44,10 +44,10 @@ namespace AsBuiltReportChart.PowerShell
         public double AreaExplodeFraction { get; set; }
 
         [Parameter(Mandatory = false)]
-        public Color ChartBorderColor { get; set; }
+        public BasicColors ChartBorderColor { get; set; }
 
         [Parameter(Mandatory = false)]
-        public int ChartBorderSize { get; set; }
+        public int ChartBorderSize { get; set; } = 1;
 
         [Parameter(Mandatory = false)]
         public Enums.BorderStyles ChartBorderStyle { get; set; }
@@ -59,7 +59,7 @@ namespace AsBuiltReportChart.PowerShell
         public int LegendFontSize { get; set; }
 
         [Parameter(Mandatory = false)]
-        public Color LegendFontColor { get; set; }
+        public BasicColors LegendFontColor { get; set; } = BasicColors.Black;
 
         [Parameter(Mandatory = false)]
         public Enums.BorderStyles LegendBorderStyle { get; set; }
@@ -68,7 +68,7 @@ namespace AsBuiltReportChart.PowerShell
         public int LegendBorderSize { get; set; }
 
         [Parameter(Mandatory = false)]
-        public Color LegendBorderColor { get; set; }
+        public BasicColors LegendBorderColor { get; set; } = BasicColors.Black;
 
         [Parameter(Mandatory = false)]
         public Enums.ColorPalettes ColorPalette { get; set; } = Enums.ColorPalettes.Category10;

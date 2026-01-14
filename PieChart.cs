@@ -16,7 +16,7 @@ public class Pie : Chart
 
                 if (_customColorPalette is not null and not [] && _customColorPalette.Length > 0)
                 {
-                    myPlot.Add.Palette = new ScottPlot.Palettes.Custom(_customColorPalette);
+                    myPlot.Add.Palette = colorPalette = new ScottPlot.Palettes.Custom(_customColorPalette);
                 }
                 else
                 {
@@ -42,8 +42,9 @@ public class Pie : Chart
             {
                 pie.Slices[i].LabelText = values[i].ToString();
                 pie.Slices[i].LabelFontSize = LabelFontSize;
-                pie.Slices[i].LabelFontColor = LabelFontColor;
+                pie.Slices[i].LabelFontColor = GetDrawingColor(LabelFontColor);
                 pie.Slices[i].LabelBold = LabelBold;
+                pie.Slices[i].LabelFontName = FontName;
 
                 if (EnableLegend)
                 {
@@ -60,10 +61,10 @@ public class Pie : Chart
                 // Legend Font Properties
                 myPlot.Legend.FontName = FontName;
                 myPlot.Legend.FontSize = LegendFontSize;
-                myPlot.Legend.FontColor = LegendFontColor;
+                myPlot.Legend.FontColor = GetDrawingColor(LegendFontColor);
 
                 // Legend box Style Properties
-                myPlot.Legend.OutlineColor = LegendBorderColor;
+                myPlot.Legend.OutlineColor = GetDrawingColor(LegendBorderColor);
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
                 myPlot.Legend.OutlinePattern = LegendBorderStyle switch
@@ -100,7 +101,7 @@ public class Pie : Chart
             {
                 myPlot.FigureBorder = new()
                 {
-                    Color = ChartBorderColor,
+                    Color = GetDrawingColor(ChartBorderColor),
                     Width = ChartBorderSize,
                     Pattern = ChartBorderStyle switch
                     {
@@ -118,8 +119,9 @@ public class Pie : Chart
             {
                 myPlot.Title(Title);
                 myPlot.Axes.Title.Label.FontSize = TitleFontSize;
-                myPlot.Axes.Title.Label.ForeColor = TitleFontColor;
+                myPlot.Axes.Title.Label.ForeColor = GetDrawingColor(TitleFontColor);
                 myPlot.Axes.Title.Label.Bold = TitleFontBold;
+                myPlot.Axes.Title.Label.FontName = FontName;
             }
 
             // Set filename

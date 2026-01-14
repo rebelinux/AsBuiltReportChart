@@ -64,3 +64,20 @@ public enum Formats
     bmp,
     svg
 }
+
+public enum BasicColors
+{
+    Black,
+    White,
+    Red,
+    Yellow,
+    Blue,
+    DarkBlue,
+    Green,
+    DarkGreen,
+    Brown,
+    Orange,
+    Pink,
+    Purple,
+    Gray
+}

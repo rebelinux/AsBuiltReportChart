@@ -13,7 +13,9 @@
     - [x] ScottPlot.Palette
     - [x] Custom Color palette
 
-- [ ] Add per image format save support
+- [x] Add per image format save support
+
+- [ ] Implement code to set Charts Magins (top, buttom, left, right)
 
 ```c#
 string[] customColors = { "#ddf6ed", "#c3e2d7", "#aacec2", "#90bbad", "#77a898" , "#5e9584", "#458370", "#2a715d", "#005f4b"};

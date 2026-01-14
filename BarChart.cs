@@ -15,7 +15,7 @@ public class Bar : Chart
             {
                 if (_customColorPalette is not null and not [] && _customColorPalette.Length > 0)
                 {
-                    myPlot.Add.Palette = new ScottPlot.Palettes.Custom(_customColorPalette);
+                    myPlot.Add.Palette = colorPalette = new ScottPlot.Palettes.Custom(_customColorPalette);
                 }
                 else
                 {
@@ -38,10 +38,16 @@ public class Bar : Chart
                 Orientations.Vertical => LabelXAxis,
                 _ => ""
             };
-            myPlot.Axes.Bottom.Label.FontSize = AxisLabelFontSize;
-            myPlot.Axes.Bottom.Label.ForeColor = AxisLabelFontColor;
-            myPlot.Axes.Bottom.Label.Bold = AxisLabelFontBold;
+            myPlot.Axes.Bottom.Label.FontSize = LabelFontSize;
+            myPlot.Axes.Bottom.Label.ForeColor = GetDrawingColor(LabelFontColor);
             myPlot.Axes.Bottom.Label.FontName = FontName;
+
+            myPlot.Axes.Bottom.TickLabelStyle.FontSize = LabelFontSize;
+            myPlot.Axes.Bottom.TickLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
+            myPlot.Axes.Bottom.TickLabelStyle.FontName = FontName;
+
+            // myPlot.Axes.Bottom.TickLabelStyle.Rotation = -45;
+
 
             myPlot.Axes.Left.Label.Text = AreaOrientation switch
             {
@@ -49,10 +55,13 @@ public class Bar : Chart
                 Orientations.Vertical => LabelYAxis,
                 _ => ""
             };
-            myPlot.Axes.Left.Label.FontSize = AxisLabelFontSize;
-            myPlot.Axes.Left.Label.ForeColor = AxisLabelFontColor;
-            myPlot.Axes.Left.Label.Bold = AxisLabelFontBold;
+            myPlot.Axes.Left.Label.FontSize = LabelFontSize;
+            myPlot.Axes.Left.Label.ForeColor = GetDrawingColor(LabelFontColor);
             myPlot.Axes.Left.Label.FontName = FontName;
+
+            myPlot.Axes.Left.TickLabelStyle.FontSize = LabelFontSize;
+            myPlot.Axes.Left.TickLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
+            myPlot.Axes.Left.TickLabelStyle.FontName = FontName;
 
             // create bars
             var bars = new List<ScottPlot.Bar>();
@@ -68,6 +77,12 @@ public class Bar : Chart
 
             // add bars to plot
             var bar = myPlot.Add.Bars(bars);
+
+            // Customize bars label style, including color
+            bar.ValueLabelStyle.FontName = FontName;
+            bar.ValueLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
+            bar.ValueLabelStyle.Bold = LabelBold;
+            bar.ValueLabelStyle.FontSize = LabelFontSize;
 
             // set each slice value to its label
             ScottPlot.TickGenerators.NumericManual tickGen = new();
@@ -109,53 +124,12 @@ public class Bar : Chart
             myPlot.Axes.Top.IsVisible = false;
             myPlot.Axes.Right.IsVisible = false;
 
-            if (EnableLegend)
-            {
-                // Legend Font Properties
-                myPlot.Legend.FontName = FontName;
-                myPlot.Legend.FontSize = LegendFontSize;
-                myPlot.Legend.FontColor = LegendFontColor;
-
-                // Legend box Style Properties
-                myPlot.Legend.OutlineColor = LegendBorderColor;
-                myPlot.Legend.OutlineWidth = LegendBorderSize;
-
-                myPlot.Legend.OutlinePattern = LegendBorderStyle switch
-                {
-                    BorderStyles.Solid => LinePattern.Solid,
-                    BorderStyles.Dashed => LinePattern.Dashed,
-                    BorderStyles.Dotted => LinePattern.Dotted,
-                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-                    _ => LinePattern.Solid
-                };
-
-                myPlot.Legend.Orientation = LegendOrientation switch
-                {
-                    Orientations.Horizontal => Orientation.Horizontal,
-                    _ => Orientation.Vertical
-                };
-
-                myPlot.Legend.Alignment = LegendAlignment switch
-                {
-                    Alignments.LowerCenter => Alignment.LowerCenter,
-                    Alignments.LowerLeft => Alignment.LowerLeft,
-                    Alignments.LowerRight => Alignment.LowerRight,
-                    Alignments.MiddleCenter => Alignment.MiddleCenter,
-                    Alignments.MiddleLeft => Alignment.MiddleLeft,
-                    Alignments.MiddleRight => Alignment.MiddleRight,
-                    Alignments.UpperCenter => Alignment.UpperCenter,
-                    Alignments.UpperLeft => Alignment.UpperLeft,
-                    Alignments.UpperRight => Alignment.UpperRight,
-                    _ => Alignment.LowerRight
-                };
-            }
-
             if (EnableChartBorder)
             {
                 myPlot.FigureBorder = new()
                 {
                     // Set chart border properties
-                    Color = ChartBorderColor,
+                    Color = GetDrawingColor(ChartBorderColor),
                     Width = ChartBorderSize,
                     Pattern = ChartBorderStyle switch
                     {
@@ -173,7 +147,7 @@ public class Bar : Chart
             {
                 myPlot.Title(Title);
                 myPlot.Axes.Title.Label.FontSize = TitleFontSize;
-                myPlot.Axes.Title.Label.ForeColor = TitleFontColor;
+                myPlot.Axes.Title.Label.ForeColor = GetDrawingColor(TitleFontColor);
                 myPlot.Axes.Title.Label.Bold = TitleFontBold;
                 myPlot.Axes.Title.Label.FontName = FontName;
             }
