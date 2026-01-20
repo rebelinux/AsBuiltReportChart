@@ -20,16 +20,16 @@ namespace AsBuiltReportChart.PowerShell
         public string? Title { get; set; }
 
         [Parameter(Mandatory = false)]
-        public bool TitleFontBold { get; set; }
+        public SwitchParameter TitleFontBold { get; set; }
 
         [Parameter(Mandatory = false)]
         public int TitleFontSize { get; set; } = 14;
 
         [Parameter(Mandatory = false)]
-        public Color TitleFontColor { get; set; }
+        public BasicColors TitleFontColor { get; set; }
 
         [Parameter(Mandatory = false)]
-        public bool EnableLegend { get; set; }
+        public SwitchParameter EnableLegend { get; set; }
 
         [Parameter(Mandatory = false)]
         public Enums.Orientations LegendOrientation { get; set; } = Enums.Orientations.Vertical;
@@ -41,6 +41,7 @@ namespace AsBuiltReportChart.PowerShell
         public Formats Format { get; set; }
 
         [Parameter(Mandatory = false)]
+        [ValidateSet("0.0", "0.1", "0.2", "0.3", "0.4", "0.5")]
         public double AreaExplodeFraction { get; set; }
 
         [Parameter(Mandatory = false)]
@@ -53,10 +54,10 @@ namespace AsBuiltReportChart.PowerShell
         public Enums.BorderStyles ChartBorderStyle { get; set; }
 
         [Parameter(Mandatory = false)]
-        public bool EnableChartBorder { get; set; }
+        public SwitchParameter EnableChartBorder { get; set; }
 
         [Parameter(Mandatory = false)]
-        public int LegendFontSize { get; set; }
+        public int LegendFontSize { get; set; } = 14;
 
         [Parameter(Mandatory = false)]
         public BasicColors LegendFontColor { get; set; } = BasicColors.Black;
@@ -65,7 +66,7 @@ namespace AsBuiltReportChart.PowerShell
         public Enums.BorderStyles LegendBorderStyle { get; set; }
 
         [Parameter(Mandatory = false)]
-        public int LegendBorderSize { get; set; }
+        public int LegendBorderSize { get; set; } = 1;
 
         [Parameter(Mandatory = false)]
         public BasicColors LegendBorderColor { get; set; } = BasicColors.Black;
@@ -74,7 +75,7 @@ namespace AsBuiltReportChart.PowerShell
         public Enums.ColorPalettes ColorPalette { get; set; } = Enums.ColorPalettes.Category10;
 
         [Parameter(Mandatory = false)]
-        public bool EnableCustomColorPalette { get; set; }
+        public SwitchParameter EnableCustomColorPalette { get; set; }
 
         [Parameter(Mandatory = false)]
         public string[]? CustomColorPalette { get; set; }
@@ -87,14 +88,27 @@ namespace AsBuiltReportChart.PowerShell
         public int LabelFontSize { get; set; } = 14;
 
         [Parameter(Mandatory = false)]
-        public Color LabelFontColor { get; set; } = Colors.Black;
+        public BasicColors LabelFontColor { get; set; } = BasicColors.Black;
 
         [Parameter(Mandatory = false)]
-        public bool LabelBold { get; set; }
+        public SwitchParameter LabelBold { get; set; }
 
         // this set the distance of the labels from the chart center (Pie Chart)
         [Parameter(Mandatory = false)]
+        [ValidateSet("0.5", "0.6", "0.7", "0.8", "0.9")]
         public double LabelDistance { get; set; } = 0.6;
+
+        // Set chart Size WxH
+        [Parameter(Mandatory = false)]
+        public int Width { get; set; } = 400;
+
+        [Parameter(Mandatory = false)]
+        public int Height { get; set; } = 300;
+
+        // Set OutputFolderPath
+        [Parameter(Mandatory = false)]
+        [ValidatePath()]
+        public string OutputFolderPath { get; set; } = Directory.GetCurrentDirectory();
 
         protected override void ProcessRecord()
         {
@@ -117,11 +131,14 @@ namespace AsBuiltReportChart.PowerShell
                 }
 
                 Chart.AreaExplodeFraction = AreaExplodeFraction;
-                // Chart area settings
-                Chart.EnableChartBorder = EnableChartBorder;
-                Chart.ChartBorderColor = ChartBorderColor;
-                Chart.ChartBorderSize = ChartBorderSize;
-                Chart.ChartBorderStyle = ChartBorderStyle;
+                if (EnableChartBorder)
+                {
+                    // Chart area settings
+                    Chart.EnableChartBorder = EnableChartBorder;
+                    Chart.ChartBorderColor = ChartBorderColor;
+                    Chart.ChartBorderSize = ChartBorderSize;
+                    Chart.ChartBorderStyle = ChartBorderStyle;
+                }
                 // Color palette settings
                 if (EnableCustomColorPalette)
                 {
@@ -141,15 +158,47 @@ namespace AsBuiltReportChart.PowerShell
                     Chart.ColorPalette = ColorPalette;
                 }
 
-                Chart.Title = Title;
+                // Title settings
+                if (Title != null)
+                {
+                    Chart.Title = Title;
+                    Chart.TitleFontBold = TitleFontBold;
+                    Chart.TitleFontSize = TitleFontSize;
+                    Chart.TitleFontColor = TitleFontColor;
+                }
+
+                // This set the distance of the labels from the chart center (Pie Chart)
+                Chart.LabelDistance = LabelDistance;
+
+                // Font Settings
+                Chart.FontName = FontName;
+                Chart.LabelFontSize = LabelFontSize;
+                Chart.LabelFontColor = LabelFontColor;
+                Chart.LabelBold = LabelBold;
+
+                // Set file directory save path 
+                Chart.OutputFolderPath = OutputFolderPath;
+
                 Chart.Format = Format;
                 Pie myPie = new();
-                myPie.Chart(Values, Labels, Filename);
+                myPie.Chart(Values, Labels, Filename, Width, Height);
             }
             else
             {
                 WriteObject("Please provide both Values and Labels parameters.");
             }
+        }
+    }
+}
+
+class ValidatePath : ValidateArgumentsAttribute
+{
+    protected override void Validate(object arguments, EngineIntrinsics engineIntrinsics)
+    {
+        string path = (string)arguments;
+        if (Directory.Exists(path) == false)
+        {
+            throw new ArgumentException("Error: Directory Not Found Exception");
         }
     }
 }

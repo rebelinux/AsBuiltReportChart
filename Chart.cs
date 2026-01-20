@@ -98,7 +98,7 @@ public partial class Chart
             ScottPlot.Palettes.Aurora => Enums.ColorPalettes.Aurora,
             ScottPlot.Palettes.Building => Enums.ColorPalettes.Building,
             ScottPlot.Palettes.ColorblindFriendly => Enums.ColorPalettes.ColorblindFriendly,
-            ScottPlot.Palettes.ColorblindFriendlyDark => Enums.ColorPalettes.ColorblindFriendlyDark,
+            // ScottPlot.Palettes.ColorblindFriendlyDark => Enums.ColorPalettes.ColorblindFriendlyDark,
             ScottPlot.Palettes.Dark => Enums.ColorPalettes.Dark,
             ScottPlot.Palettes.DarkPastel => Enums.ColorPalettes.DarkPastel,
             ScottPlot.Palettes.Frost => Enums.ColorPalettes.Frost,
@@ -129,7 +129,7 @@ public partial class Chart
                 ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
                 ColorPalettes.Building => new ScottPlot.Palettes.Building(),
                 ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
-                ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
+                // ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
                 ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
                 ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
                 ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
@@ -179,6 +179,31 @@ public partial class Chart
     }
     public static bool EnableCustomColorPalette { get; set; }
 
+    internal static string? _outputFolderPath;
+
+    public static string OutputFolderPath
+    {
+        get
+        {
+            return _outputFolderPath ?? Directory.GetCurrentDirectory();
+        }
+        set
+        {
+            if (value is null)
+            {
+                _outputFolderPath = Directory.GetCurrentDirectory();
+            }
+            else if (Directory.Exists(value))
+            {
+                _outputFolderPath = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: Directory Not Found Exception");
+            }
+        }
+    }
+
     public static bool IsValidHexColor(string hexCode)
     {
         // Regex for #RGB, #RRGGBB, #RGBA, or #RRGGBBAA formats (case-insensitive)
@@ -201,7 +226,8 @@ public partial class Chart
         { BasicColors.Pink,  Colors.Pink },
         { BasicColors.Purple,  Colors.Purple },
         { BasicColors.Gray,  Colors.Gray },
-        { BasicColors.DarkBlue,  Colors.DarkBlue },
+        { BasicColors.Blue,  Colors.Blue },
+                { BasicColors.DarkBlue,  Colors.DarkBlue },
         { BasicColors.DarkGreen,  Colors.DarkGreen },
     };
 

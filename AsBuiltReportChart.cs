@@ -10,16 +10,16 @@ namespace AsBuiltReportChart
             string[] labels = ["Passed", "Unable to detect", "Not Implemented", "Suppressed"];
 
             Chart.EnableLegend = true;
-            Chart.LegendFontColor = BasicColors.Red;
+            Chart.LegendFontColor = BasicColors.Black;
             Chart.Title = "Best Practices";
             Chart.TitleFontBold = false;
             Chart.TitleFontSize = 18;
-            Chart.TitleFontColor = BasicColors.Red;
+            Chart.TitleFontColor = BasicColors.Black;
             Chart.LabelXAxis = "Values";
             Chart.LabelYAxis = "Count";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 14;
-            Chart.LabelFontColor = BasicColors.Red;
+            Chart.LabelFontColor = BasicColors.Black;
             Chart.ChartBorderStyle = BorderStyles.Dotted;
             Chart.ChartBorderColor = BasicColors.DarkGreen;
             Chart.ChartBorderSize = 2;
@@ -37,9 +37,9 @@ namespace AsBuiltReportChart
             Bar myBar = new();
             Chart.Format = Formats.png;
 
-            myPie.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
+            myPie.Chart(values, labels, width: 600, height: 600, filename: "PieChartExample");
 
-            myBar.Chart(values, labels, width: 600, height: 400, filename: "BarChartExample");
+            myBar.Chart(values, labels, width: 600, height: 600, filename: "BarChartExample");
 
         }
     }

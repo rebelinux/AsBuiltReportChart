@@ -124,26 +124,28 @@ public class Pie : Chart
                 myPlot.Axes.Title.Label.FontName = FontName;
             }
 
+            string Filepath = _outputFolderPath ?? Directory.GetCurrentDirectory();
+
             // Set filename
             switch (Format)
             {
                 case Formats.png:
-                    myPlot.SavePng($"{filename}.png", width, height);
+                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
                     break;
                 case Formats.jpg:
-                    myPlot.SaveJpeg($"{filename}.jpg", width, height);
+                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpeg"), width, height);
                     break;
                 case Formats.jpeg:
-                    myPlot.SaveJpeg($"{filename}.jpg", width, height);
+                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpg"), width, height);
                     break;
                 case Formats.bmp:
-                    myPlot.SaveBmp($"{filename}.bmp", width, height);
+                    myPlot.SaveBmp(Path.Combine(Filepath, $"{filename}.bmp"), width, height);
                     break;
                 case Formats.svg:
-                    myPlot.SaveSvg($"{filename}.svg", width, height);
+                    myPlot.SaveSvg(Path.Combine(Filepath, $"{filename}.svg"), width, height);
                     break;
                 default:
-                    myPlot.SavePng($"{filename}.png", width, height);
+                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
                     break;
             }
         }

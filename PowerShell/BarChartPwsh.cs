@@ -20,13 +20,37 @@ namespace AsBuiltReportChart.PowerShell
         public string? Title { get; set; }
 
         [Parameter(Mandatory = false)]
-        public bool TitleFontBold { get; set; }
+        public SwitchParameter TitleFontBold { get; set; }
 
         [Parameter(Mandatory = false)]
         public int TitleFontSize { get; set; } = 14;
 
         [Parameter(Mandatory = false)]
         public BasicColors TitleFontColor { get; set; } = BasicColors.Black;
+
+        [Parameter(Mandatory = false)]
+        public SwitchParameter EnableLegend { get; set; }
+
+        [Parameter(Mandatory = false)]
+        public Enums.Orientations LegendOrientation { get; set; } = Enums.Orientations.Vertical;
+
+        [Parameter(Mandatory = false)]
+        public Enums.Alignments LegendAlignment { get; set; } = Enums.Alignments.UpperRight;
+
+        [Parameter(Mandatory = false)]
+        public int LegendFontSize { get; set; } = 14;
+
+        [Parameter(Mandatory = false)]
+        public BasicColors LegendFontColor { get; set; } = BasicColors.Black;
+
+        [Parameter(Mandatory = false)]
+        public Enums.BorderStyles LegendBorderStyle { get; set; }
+
+        [Parameter(Mandatory = false)]
+        public int LegendBorderSize { get; set; } = 1;
+
+        [Parameter(Mandatory = false)]
+        public BasicColors LegendBorderColor { get; set; } = BasicColors.Black;
 
         [Parameter(Mandatory = true)]
         public Formats Format { get; set; }
@@ -41,13 +65,13 @@ namespace AsBuiltReportChart.PowerShell
         public Enums.BorderStyles ChartBorderStyle { get; set; }
 
         [Parameter(Mandatory = false)]
-        public bool EnableChartBorder { get; set; }
+        public SwitchParameter EnableChartBorder { get; set; }
 
         [Parameter(Mandatory = false)]
         public Enums.ColorPalettes ColorPalette { get; set; } = Enums.ColorPalettes.Category10;
 
         [Parameter(Mandatory = false)]
-        public bool EnableCustomColorPalette { get; set; }
+        public SwitchParameter EnableCustomColorPalette { get; set; }
 
         [Parameter(Mandatory = false)]
         public string[]? CustomColorPalette { get; set; }
@@ -63,7 +87,7 @@ namespace AsBuiltReportChart.PowerShell
         public BasicColors LabelFontColor { get; set; } = BasicColors.Black;
 
         [Parameter(Mandatory = false)]
-        public bool LabelBold { get; set; }
+        public SwitchParameter LabelBold { get; set; }
 
         // Set font for the X and Y axis labels (Bar Chart)
         [Parameter(Mandatory = false)]
@@ -76,10 +100,37 @@ namespace AsBuiltReportChart.PowerShell
         [Parameter(Mandatory = false)]
         public Enums.Orientations AreaOrientation { get; set; } = Enums.Orientations.Vertical;
 
+        // Set chart Size WxH
+        [Parameter(Mandatory = false)]
+        public int Width { get; set; } = 400;
+
+        [Parameter(Mandatory = false)]
+        public int Height { get; set; } = 300;
+
+        // Set OutputFolderPath
+        [Parameter(Mandatory = false)]
+        public string OutputFolderPath { get; set; } = Directory.GetCurrentDirectory();
+
         protected override void ProcessRecord()
         {
             if (Values != null && Labels != null)
             {
+
+                if (EnableLegend)
+                {
+                    Chart.EnableLegend = EnableLegend;
+                    // Legend box settings
+                    Chart.LegendOrientation = LegendOrientation;
+                    Chart.LegendAlignment = LegendAlignment;
+
+                    // Legend font settings
+                    Chart.LegendFontSize = LegendFontSize;
+                    Chart.LegendFontColor = LegendFontColor;
+                    // Legend border settings
+                    Chart.LegendBorderStyle = LegendBorderStyle;
+                    Chart.LegendBorderSize = LegendBorderSize;
+                    Chart.LegendBorderColor = LegendBorderColor;
+                }
 
                 if (EnableChartBorder)
                 {
@@ -130,9 +181,12 @@ namespace AsBuiltReportChart.PowerShell
                 // this set the orientation chart area  (Bar Chart)
                 Chart.AreaOrientation = AreaOrientation;
 
+                // Set file directory save path 
+                Chart.OutputFolderPath = OutputFolderPath;
+
                 Chart.Format = Format;
                 Bar myBar = new();
-                myBar.Chart(Values, Labels, Filename);
+                myBar.Chart(Values, Labels, Filename, Width, Height);
             }
             else
             {

@@ -46,7 +46,7 @@ public class Bar : Chart
             myPlot.Axes.Bottom.TickLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
             myPlot.Axes.Bottom.TickLabelStyle.FontName = FontName;
 
-            // myPlot.Axes.Bottom.TickLabelStyle.Rotation = -45;
+            // myPlot.Axes.Bottom.TickLabelStyle.Rotation = -10;
 
 
             myPlot.Axes.Left.Label.Text = AreaOrientation switch
@@ -90,13 +90,21 @@ public class Bar : Chart
             // assign labels to each bar
             if (AreaOrientation == Orientations.Vertical)
             {
-                myPlot.Axes.Bottom.TickGenerator = tickGen;
+                // myPlot.Axes.Bottom.TickGenerator = tickGen;
                 for (var i = 0; i < bar.Bars.Count; i++)
                 {
                     // set bar value as label
                     bar.Bars[i].Label = values[i].ToString();
                     // set ticks
-                    tickGen.AddMajor(i, labels[i]);
+                    // tickGen.AddMajor(i, labels[i]);
+                    if (colorPalette is not null && EnableLegend)
+                    {
+                        myPlot.Legend.ManualItems.Add(new LegendItem()
+                        {
+                            LabelText = labels[i],
+                            FillColor = colorPalette.GetColor(i)
+                        });
+                    }
                 }
             }
             else
@@ -123,6 +131,49 @@ public class Bar : Chart
             myPlot.HideGrid();
             myPlot.Axes.Top.IsVisible = false;
             myPlot.Axes.Right.IsVisible = false;
+
+            if (AreaOrientation == Orientations.Vertical && EnableLegend)
+            {
+                myPlot.ShowLegend();
+
+                // Legend Font Properties
+                myPlot.Legend.FontName = FontName;
+                myPlot.Legend.FontSize = LegendFontSize;
+                myPlot.Legend.FontColor = GetDrawingColor(LegendFontColor);
+
+                // Legend box Style Properties
+                myPlot.Legend.OutlineColor = GetDrawingColor(LegendBorderColor);
+                myPlot.Legend.OutlineWidth = LegendBorderSize;
+
+                myPlot.Legend.OutlinePattern = LegendBorderStyle switch
+                {
+                    BorderStyles.Solid => LinePattern.Solid,
+                    BorderStyles.Dashed => LinePattern.Dashed,
+                    BorderStyles.Dotted => LinePattern.Dotted,
+                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
+                    _ => LinePattern.Solid
+                };
+
+                myPlot.Legend.Orientation = LegendOrientation switch
+                {
+                    Orientations.Horizontal => Orientation.Horizontal,
+                    _ => Orientation.Vertical
+                };
+
+                myPlot.Legend.Alignment = LegendAlignment switch
+                {
+                    Alignments.LowerCenter => Alignment.LowerCenter,
+                    Alignments.LowerLeft => Alignment.LowerLeft,
+                    Alignments.LowerRight => Alignment.LowerRight,
+                    Alignments.MiddleCenter => Alignment.MiddleCenter,
+                    Alignments.MiddleLeft => Alignment.MiddleLeft,
+                    Alignments.MiddleRight => Alignment.MiddleRight,
+                    Alignments.UpperCenter => Alignment.UpperCenter,
+                    Alignments.UpperLeft => Alignment.UpperLeft,
+                    Alignments.UpperRight => Alignment.UpperRight,
+                    _ => Alignment.UpperRight
+                };
+            }
 
             if (EnableChartBorder)
             {
@@ -152,26 +203,33 @@ public class Bar : Chart
                 myPlot.Axes.Title.Label.FontName = FontName;
             }
 
+            // Set margins settings
+            myPlot.Axes.Margins(left: 0.1, right: 0.1, bottom: 0.1, top: 0.2);
+
+            // Set filepath
+
+            string Filepath = _outputFolderPath ?? Directory.GetCurrentDirectory();
+
             // Set filename
             switch (Format)
             {
                 case Formats.png:
-                    myPlot.SavePng($"{filename}.png", width, height);
+                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
                     break;
                 case Formats.jpg:
-                    myPlot.SaveJpeg($"{filename}.jpg", width, height);
+                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpeg"), width, height);
                     break;
                 case Formats.jpeg:
-                    myPlot.SaveJpeg($"{filename}.jpg", width, height);
+                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpg"), width, height);
                     break;
                 case Formats.bmp:
-                    myPlot.SaveBmp($"{filename}.bmp", width, height);
+                    myPlot.SaveBmp(Path.Combine(Filepath, $"{filename}.bmp"), width, height);
                     break;
                 case Formats.svg:
-                    myPlot.SaveSvg($"{filename}.svg", width, height);
+                    myPlot.SaveSvg(Path.Combine(Filepath, $"{filename}.svg"), width, height);
                     break;
                 default:
-                    myPlot.SavePng($"{filename}.png", width, height);
+                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
                     break;
             }
         }
