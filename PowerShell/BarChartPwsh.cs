@@ -7,7 +7,7 @@ namespace AsBuiltReportChart.PowerShell
     {
         // Declare the parameters for the cmdlet.
         [Parameter(Mandatory = false)]
-        public string Filename { get; set; } = "BarChartExample";
+        public string Filename { get; set; } = Chart.GenerateToken(8);
 
         [Parameter(Mandatory = true)]
         public double[]? Values { get; set; }

@@ -227,12 +227,19 @@ public partial class Chart
         { BasicColors.Purple,  Colors.Purple },
         { BasicColors.Gray,  Colors.Gray },
         { BasicColors.Blue,  Colors.Blue },
-                { BasicColors.DarkBlue,  Colors.DarkBlue },
+        { BasicColors.DarkBlue,  Colors.DarkBlue },
         { BasicColors.DarkGreen,  Colors.DarkGreen },
     };
 
     public static Color GetDrawingColor(BasicColors color)
     {
         return ColorMap[color];
+    }
+    public static string GenerateToken(Byte length)
+    {
+        var bytes = new byte[length];
+        var rnd = new Random();
+        rnd.NextBytes(bytes);
+        return Convert.ToBase64String(bytes).Replace("=", "").Replace("+", "").Replace("/", "");
     }
 }

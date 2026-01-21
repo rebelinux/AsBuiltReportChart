@@ -1,4 +1,3 @@
-using ScottPlot;
 using System.Management.Automation;
 
 namespace AsBuiltReportChart.PowerShell
@@ -8,7 +7,7 @@ namespace AsBuiltReportChart.PowerShell
     {
         // Declare the parameters for the cmdlet.
         [Parameter(Mandatory = false)]
-        public string Filename { get; set; } = "PieChartExample";
+        public string Filename { get; set; } = Chart.GenerateToken(8);
 
         [Parameter(Mandatory = true)]
         public double[]? Values { get; set; }
