@@ -6,17 +6,23 @@ namespace AsBuiltReportChart
     {
         public static void Main(string[] args)
         {
-            double[] values = [17, 2, 16, 1];
-            string[] labels = ["Passed", "Unable to detect", "Not Implemented", "Suppressed"];
+            List<double[]> values =
+            [
+                [3, 2,],
+                [8, 12],
+                [5, 5]
+            ];
+            string[] labels = ["Aggr0", "Aggr1", "Aggr2"];
+            string[] category = ["Free", "Used"];
 
             Chart.EnableLegend = true;
             Chart.LegendFontColor = BasicColors.Black;
-            Chart.Title = "Best Practices";
+            Chart.Title = "Aggregate Usage";
             Chart.TitleFontBold = false;
             Chart.TitleFontSize = 18;
             Chart.TitleFontColor = BasicColors.Black;
-            Chart.LabelXAxis = "Values";
-            Chart.LabelYAxis = "Count";
+            Chart.LabelXAxis = "Names";
+            Chart.LabelYAxis = "Usage";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 14;
             Chart.LabelFontColor = BasicColors.Black;
@@ -28,19 +34,14 @@ namespace AsBuiltReportChart
             Chart.LegendAlignment = Alignments.UpperRight;
             Chart.LegendBorderSize = 0;
 
-            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
-            Chart.EnableCustomColorPalette = true;
+            Chart.ColorPalette = ColorPalettes.Nord;
 
-            Chart.AreaOrientation = Orientations.Vertical;
+            Chart.AreaOrientation = Orientations.Horizontal;
 
-            Pie myPie = new();
-            Bar myBar = new();
+            StackedBar myStackedBar = new();
             Chart.Format = Formats.png;
 
-            myPie.Chart(values, labels, width: 600, height: 600, filename: "PieChartExample");
-
-            myBar.Chart(values, labels, width: 600, height: 600, filename: "BarChartExample");
-
+            myStackedBar.Chart(values, labels, category, width: 600, height: 600, filename: "StackedBarChartExample");
         }
     }
 }

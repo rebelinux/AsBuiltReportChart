@@ -17,3 +17,4 @@
 
 - [ ] Implement code to set Charts Magins (top, buttom, left, right)
 - [x] implement outputfolder
+- [ ] Add feature to set BarChart bar width and space separation
