@@ -73,8 +73,16 @@ public class StackedBar : Chart
                 {
                     if (colorPalette is not null)
                     {
-                        bars.Add(new ScottPlot.Bar { Position = x, Value = nextBarBase + values[x][i], ValueBase = nextBarBase, FillColor = colorPalette.GetColor(bars.Count) });
-                        nextBarBase +=values[x][i];
+                        bars.Add(new ScottPlot.Bar
+                        {
+                            Position = x,
+                            Value = values[x][i],
+                            ValueBase = nextBarBase,
+                            FillColor = colorPalette.GetColor(i),
+                            Label = $"{values[x][i]}",
+                            CenterLabel = true,
+                        });
+                        nextBarBase += values[x][i];
                     }
                 }
             }
@@ -92,37 +100,49 @@ public class StackedBar : Chart
             ScottPlot.TickGenerators.NumericManual tickGen = new();
 
             // assign labels to each bar
-            // if (AreaOrientation == Orientations.Vertical)
-            // {
-            //     // myPlot.Axes.Bottom.TickGenerator = tickGen;
-            //     for (var i = 0; i < bar.Bars.Count; i++)
-            //     {
-            //         // set bar value as label
-            //         bar.Bars[i].Label = values[i].ToString();
-            //         // set ticks
-            //         // tickGen.AddMajor(i, labels[i]);
-            //         if (colorPalette is not null && EnableLegend)
-            //         {
-            //             myPlot.Legend.ManualItems.Add(new LegendItem()
-            //             {
-            //                 LabelText = labels[i],
-            //                 FillColor = colorPalette.GetColor(i)
-            //             });
-            //         }
-            //     }
-            // }
-            // else
-            // {
-            //     double[] positions = new double[bar.Bars.Count];
-            //     for (var i = 0; i < bar.Bars.Count; i++)
-            //     {
-            //         // set bar value as label
-            //         bar.Bars[i].Label = values[i].ToString();
-            //         positions[i] = i;
-            //     }
-            //     // set ticks for horizontal orientation
-            //     myPlot.Axes.Left.SetTicks(positions, labels);
-            // }
+            if (AreaOrientation == Orientations.Vertical)
+            {
+                for (var i = 0; i < categoryNames.Length; i++)
+                {
+                    if (colorPalette is not null && EnableLegend)
+                    {
+                        myPlot.Legend.ManualItems.Add(new LegendItem()
+                        {
+                            LabelText = categoryNames[i],
+                            FillColor = colorPalette.GetColor(i)
+                        });
+                    }
+                }
+
+                for (var i = 0; i < labels.Length; i++)
+                {
+                    // set ticks
+                    tickGen.AddMajor(i, labels[i]);
+                }
+                myPlot.Axes.Bottom.TickGenerator = tickGen;
+            }
+            else
+            {
+                for (var i = 0; i < categoryNames.Length; i++)
+                {
+                    if (colorPalette is not null && EnableLegend)
+                    {
+                        myPlot.Legend.ManualItems.Add(new LegendItem()
+                        {
+                            LabelText = categoryNames[i],
+                            FillColor = colorPalette.GetColor(i)
+                        });
+                    }
+                }
+
+                for (var i = 0; i < labels.Length; i++)
+                {
+                    // set ticks
+                    tickGen.AddMajor(i, labels[i]);
+                }
+                // set ticks for horizontal orientation
+                myPlot.Axes.Left.TickGenerator = tickGen;
+            }
 
             bar.Horizontal = AreaOrientation switch
             {
@@ -136,7 +156,7 @@ public class StackedBar : Chart
             myPlot.Axes.Top.IsVisible = false;
             myPlot.Axes.Right.IsVisible = false;
 
-            if (AreaOrientation == Orientations.Vertical && EnableLegend)
+            if (EnableLegend)
             {
                 myPlot.ShowLegend();
 
