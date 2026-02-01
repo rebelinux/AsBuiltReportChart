@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace AsBuiltReportChart.PowerShell
 {
-    [Cmdlet(VerbsCommon.New, "BarChart")]
+    [Cmdlet(VerbsCommon.New, "StackedBar")]
     public class NewStackedBarChartCommand : Cmdlet
     {
         // Declare the parameters for the cmdlet.
@@ -10,10 +10,13 @@ namespace AsBuiltReportChart.PowerShell
         public string Filename { get; set; } = Chart.GenerateToken(8);
 
         [Parameter(Mandatory = true)]
-        public double[]? Values { get; set; }
+        public List<double[]>? Values { get; set; }
 
         [Parameter(Mandatory = true)]
         public string[]? Labels { get; set; }
+
+        [Parameter(Mandatory = true)]
+        public string[]? LegendCategories { get; set; }
 
         // Title settings
         [Parameter(Mandatory = true)]
@@ -113,7 +116,7 @@ namespace AsBuiltReportChart.PowerShell
 
         protected override void ProcessRecord()
         {
-            if (Values != null && Labels != null)
+            if (Values != null && Labels != null && LegendCategories != null)
             {
 
                 if (EnableLegend)
@@ -185,12 +188,12 @@ namespace AsBuiltReportChart.PowerShell
                 Chart.OutputFolderPath = OutputFolderPath;
 
                 Chart.Format = Format;
-                Bar myBar = new();
-                myBar.Chart(Values, Labels, Filename, Width, Height);
+                StackedBar myStackedBar = new();
+                WriteObject(myStackedBar.Chart(Values, Labels, LegendCategories, Filename, Width, Height));
             }
             else
             {
-                WriteObject("Please provide both Values and Labels parameters.");
+                WriteObject("Please provide Values, Labels and  LegendCategories parameters.");
             }
         }
     }

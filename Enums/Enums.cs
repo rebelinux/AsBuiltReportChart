@@ -62,7 +62,8 @@ public enum Formats
     jpg,
     jpeg,
     bmp,
-    svg
+    svg, 
+    base64
 }
 
 public enum BasicColors

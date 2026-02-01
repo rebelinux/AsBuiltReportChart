@@ -8,12 +8,12 @@ namespace AsBuiltReportChart
         {
             List<double[]> values =
             [
-                [3, 2,],
-                [8, 12],
-                [5, 5]
+                [3, 5,20],
+                [8, 20,33],
+                [5, 10,23]
             ];
             string[] labels = ["Aggr0", "Aggr1", "Aggr2"];
-            string[] category = ["Free", "Used"];
+            string[] category = ["Used", "Free","Papa"];
 
             Chart.EnableLegend = true;
             Chart.LegendFontColor = BasicColors.Black;
@@ -21,7 +21,7 @@ namespace AsBuiltReportChart
             Chart.TitleFontBold = false;
             Chart.TitleFontSize = 18;
             Chart.TitleFontColor = BasicColors.Black;
-            Chart.LabelXAxis = "Names";
+            Chart.LabelXAxis = "Aggregates";
             Chart.LabelYAxis = "Usage";
             Chart.LabelBold = false;
             Chart.LabelFontSize = 14;
@@ -30,13 +30,13 @@ namespace AsBuiltReportChart
             Chart.ChartBorderColor = BasicColors.DarkGreen;
             Chart.ChartBorderSize = 2;
             Chart.EnableChartBorder = true;
-            Chart.LegendOrientation = Orientations.Vertical;
-            Chart.LegendAlignment = Alignments.UpperRight;
+            Chart.LegendOrientation = Orientations.Horizontal;
+            Chart.LegendAlignment = Alignments.UpperCenter;
             Chart.LegendBorderSize = 0;
 
-            Chart.ColorPalette = ColorPalettes.Nord;
+            Chart.ColorPalette = ColorPalettes.Dark;
 
-            Chart.AreaOrientation = Orientations.Horizontal;
+            Chart.AreaOrientation = Orientations.Vertical;
 
             StackedBar myStackedBar = new();
             Chart.Format = Formats.png;

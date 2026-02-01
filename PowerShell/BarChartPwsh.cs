@@ -39,6 +39,7 @@ namespace AsBuiltReportChart.PowerShell
 
         [Parameter(Mandatory = false)]
         public int LegendFontSize { get; set; } = 14;
+        public SwitchParameter LegendlBold { get; set; }
 
         [Parameter(Mandatory = false)]
         public BasicColors LegendFontColor { get; set; } = BasicColors.Black;
@@ -126,6 +127,7 @@ namespace AsBuiltReportChart.PowerShell
                     // Legend font settings
                     Chart.LegendFontSize = LegendFontSize;
                     Chart.LegendFontColor = LegendFontColor;
+                    Chart.LegendlBold = LegendlBold;
                     // Legend border settings
                     Chart.LegendBorderStyle = LegendBorderStyle;
                     Chart.LegendBorderSize = LegendBorderSize;
@@ -186,7 +188,7 @@ namespace AsBuiltReportChart.PowerShell
 
                 Chart.Format = Format;
                 Bar myBar = new();
-                myBar.Chart(Values, Labels, Filename, Width, Height);
+                WriteObject(myBar.Chart(Values, Labels, Filename, Width, Height));
             }
             else
             {

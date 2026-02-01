@@ -71,6 +71,7 @@ public partial class Chart
     // Legend Font settings (Pie Chart)
     public static int LegendFontSize { get; set; } = 12;
     public static BasicColors LegendFontColor { get; set; } = BasicColors.Black;
+    public static bool LegendlBold { get; set; }
 
     // Legend border settings (Pie Chart)
     public static BorderStyles LegendBorderStyle { get; set; } = BorderStyles.Solid;
@@ -214,6 +215,40 @@ public partial class Chart
     [GeneratedRegex("^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")]
     private static partial Regex MyRegex();
 
+    internal static readonly IReadOnlyDictionary<BorderStyles, LinePattern> LegendBorderStyleMap = new Dictionary<BorderStyles, LinePattern>()
+    {
+        {BorderStyles.Solid, LinePattern.Solid},
+        {BorderStyles.Dashed , LinePattern.Dashed},
+        {BorderStyles.Dotted ,LinePattern.Dotted},
+        {BorderStyles.DenselyDashed, LinePattern.DenselyDashed},
+    };
+
+    internal static readonly IReadOnlyDictionary<Orientations, Orientation> LegendOrientationMap = new Dictionary<Orientations, Orientation>()
+    {
+        {Orientations.Horizontal, Orientation.Horizontal},
+        {Orientations.Vertical, Orientation.Vertical},
+    };
+
+    internal static readonly IReadOnlyDictionary<Alignments, Alignment> LegendAlignmentMap = new Dictionary<Alignments, Alignment>()
+    {
+        {Alignments.LowerCenter, Alignment.LowerCenter},
+        {Alignments.LowerLeft,Alignment.LowerLeft},
+        {Alignments.LowerRight, Alignment.LowerRight},
+        {Alignments.MiddleCenter,Alignment.MiddleCenter},
+        {Alignments.MiddleLeft, Alignment.MiddleLeft},
+        {Alignments.MiddleRight,Alignment.MiddleRight},
+        {Alignments.UpperCenter,Alignment.UpperCenter},
+        {Alignments.UpperLeft,Alignment.UpperLeft},
+        {Alignments.UpperRight, Alignment.UpperRight},
+    };
+    internal static readonly IReadOnlyDictionary<BorderStyles, LinePattern> ChartBorderStyleMap = new Dictionary<BorderStyles, LinePattern>()
+    {
+        {BorderStyles.Solid, LinePattern.Solid},
+        {BorderStyles.Dashed, LinePattern.Dashed},
+        {BorderStyles.Dotted, LinePattern.Dotted},
+        {BorderStyles.DenselyDashed, LinePattern.DenselyDashed},
+    };
+
     internal static readonly IReadOnlyDictionary<BasicColors, Color> ColorMap = new Dictionary<BasicColors, Color>()
     {
         { BasicColors.Black,  Colors.Black },
@@ -241,5 +276,87 @@ public partial class Chart
         var rnd = new Random();
         rnd.NextBytes(bytes);
         return Convert.ToBase64String(bytes).Replace("=", "").Replace("+", "").Replace("/", "");
+    }
+    public static object SaveInFormat(Plot plot, int width, int height, string filepath, string filename, Formats Format)
+    {
+        switch (Format)
+        {
+            case Formats.png:
+                plot.SavePng(Path.Combine(filepath, $"{filename}.png"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.png"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            case Formats.jpg:
+                plot.SaveJpeg(Path.Combine(filepath, $"{filename}.jpeg"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    System.IO.FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.jpeg"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            case Formats.jpeg:
+                plot.SaveJpeg(Path.Combine(filepath, $"{filename}.jpg"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    System.IO.FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.jpg"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            case Formats.bmp:
+                plot.SaveBmp(Path.Combine(filepath, $"{filename}.bmp"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    System.IO.FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.bmp"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            case Formats.svg:
+                plot.SaveSvg(Path.Combine(filepath, $"{filename}.svg"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    System.IO.FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.svg"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            case Formats.base64:
+                byte[] imgBytes = plot.GetImageBytes(width, height, ImageFormat.Png);
+                if (imgBytes != null)
+                {
+                    return Convert.ToBase64String(imgBytes);
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+            default:
+                plot.SavePng(Path.Combine(filepath, $"{filename}.png"), width, height);
+                if (File.Exists(Path.Combine(filepath, $"{filename}.png")))
+                {
+                    System.IO.FileInfo fileInfo = new(Path.Combine(filepath, $"{filename}.png"));
+                    return fileInfo;
+                }
+                else
+                {
+                    throw new ArgumentException("Error: Unable to Export Chart Exception");
+                }
+        }
     }
 }

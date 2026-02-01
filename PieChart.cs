@@ -5,7 +5,7 @@ namespace AsBuiltReportChart;
 public class Pie : Chart
 {
     public Pie() { }
-    public void Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
+    public object Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
     {
         if (values.Length == labels.Length)
         {
@@ -67,34 +67,11 @@ public class Pie : Chart
                 myPlot.Legend.OutlineColor = GetDrawingColor(LegendBorderColor);
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = LegendBorderStyle switch
-                {
-                    BorderStyles.Solid => LinePattern.Solid,
-                    BorderStyles.Dashed => LinePattern.Dashed,
-                    BorderStyles.Dotted => LinePattern.Dotted,
-                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-                    _ => LinePattern.Solid
-                };
+                myPlot.Legend.OutlinePattern = LegendBorderStyleMap[LegendBorderStyle];
 
-                myPlot.Legend.Orientation = LegendOrientation switch
-                {
-                    Orientations.Horizontal => Orientation.Horizontal,
-                    _ => Orientation.Vertical
-                };
+                myPlot.Legend.Orientation = LegendOrientationMap[LegendOrientation];
 
-                myPlot.Legend.Alignment = LegendAlignment switch
-                {
-                    Alignments.LowerCenter => Alignment.LowerCenter,
-                    Alignments.LowerLeft => Alignment.LowerLeft,
-                    Alignments.LowerRight => Alignment.LowerRight,
-                    Alignments.MiddleCenter => Alignment.MiddleCenter,
-                    Alignments.MiddleLeft => Alignment.MiddleLeft,
-                    Alignments.MiddleRight => Alignment.MiddleRight,
-                    Alignments.UpperCenter => Alignment.UpperCenter,
-                    Alignments.UpperLeft => Alignment.UpperLeft,
-                    Alignments.UpperRight => Alignment.UpperRight,
-                    _ => Alignment.LowerRight
-                };
+                myPlot.Legend.Alignment = LegendAlignmentMap[LegendAlignment];
             }
 
             if (EnableChartBorder)
@@ -103,14 +80,7 @@ public class Pie : Chart
                 {
                     Color = GetDrawingColor(ChartBorderColor),
                     Width = ChartBorderSize,
-                    Pattern = ChartBorderStyle switch
-                    {
-                        BorderStyles.Solid => LinePattern.Solid,
-                        BorderStyles.Dashed => LinePattern.Dashed,
-                        BorderStyles.Dotted => LinePattern.Dotted,
-                        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-                        _ => LinePattern.Solid
-                    }
+                    Pattern = ChartBorderStyleMap[ChartBorderStyle],
                 };
             }
 
@@ -124,30 +94,11 @@ public class Pie : Chart
                 myPlot.Axes.Title.Label.FontName = FontName;
             }
 
+            // Set filetpath to save
             string Filepath = _outputFolderPath ?? Directory.GetCurrentDirectory();
 
             // Set filename
-            switch (Format)
-            {
-                case Formats.png:
-                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
-                    break;
-                case Formats.jpg:
-                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpeg"), width, height);
-                    break;
-                case Formats.jpeg:
-                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpg"), width, height);
-                    break;
-                case Formats.bmp:
-                    myPlot.SaveBmp(Path.Combine(Filepath, $"{filename}.bmp"), width, height);
-                    break;
-                case Formats.svg:
-                    myPlot.SaveSvg(Path.Combine(Filepath, $"{filename}.svg"), width, height);
-                    break;
-                default:
-                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
-                    break;
-            }
+            return SaveInFormat(myPlot, width, height, Filepath, filename, Format);
         }
         else
         {

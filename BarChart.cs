@@ -5,7 +5,7 @@ namespace AsBuiltReportChart;
 public class Bar : Chart
 {
     static Bar() { }
-    public void Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
+    public object Chart(double[] values, string[] labels, string filename = "output", int width = 400, int height = 300)
     {
         if (values.Length == labels.Length)
         {
@@ -45,6 +45,7 @@ public class Bar : Chart
             myPlot.Axes.Bottom.TickLabelStyle.FontSize = LabelFontSize;
             myPlot.Axes.Bottom.TickLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
             myPlot.Axes.Bottom.TickLabelStyle.FontName = FontName;
+            myPlot.Axes.Bottom.Label.Bold = LabelBold;
 
             // myPlot.Axes.Bottom.TickLabelStyle.Rotation = -10;
 
@@ -58,6 +59,7 @@ public class Bar : Chart
             myPlot.Axes.Left.Label.FontSize = LabelFontSize;
             myPlot.Axes.Left.Label.ForeColor = GetDrawingColor(LabelFontColor);
             myPlot.Axes.Left.Label.FontName = FontName;
+            myPlot.Axes.Left.Label.Bold = LabelBold;
 
             myPlot.Axes.Left.TickLabelStyle.FontSize = LabelFontSize;
             myPlot.Axes.Left.TickLabelStyle.ForeColor = GetDrawingColor(LabelFontColor);
@@ -145,34 +147,11 @@ public class Bar : Chart
                 myPlot.Legend.OutlineColor = GetDrawingColor(LegendBorderColor);
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = LegendBorderStyle switch
-                {
-                    BorderStyles.Solid => LinePattern.Solid,
-                    BorderStyles.Dashed => LinePattern.Dashed,
-                    BorderStyles.Dotted => LinePattern.Dotted,
-                    BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-                    _ => LinePattern.Solid
-                };
+                myPlot.Legend.OutlinePattern = LegendBorderStyleMap[LegendBorderStyle];
 
-                myPlot.Legend.Orientation = LegendOrientation switch
-                {
-                    Orientations.Horizontal => Orientation.Horizontal,
-                    _ => Orientation.Vertical
-                };
+                myPlot.Legend.Orientation = LegendOrientationMap[LegendOrientation];
 
-                myPlot.Legend.Alignment = LegendAlignment switch
-                {
-                    Alignments.LowerCenter => Alignment.LowerCenter,
-                    Alignments.LowerLeft => Alignment.LowerLeft,
-                    Alignments.LowerRight => Alignment.LowerRight,
-                    Alignments.MiddleCenter => Alignment.MiddleCenter,
-                    Alignments.MiddleLeft => Alignment.MiddleLeft,
-                    Alignments.MiddleRight => Alignment.MiddleRight,
-                    Alignments.UpperCenter => Alignment.UpperCenter,
-                    Alignments.UpperLeft => Alignment.UpperLeft,
-                    Alignments.UpperRight => Alignment.UpperRight,
-                    _ => Alignment.UpperRight
-                };
+                myPlot.Legend.Alignment = LegendAlignmentMap[LegendAlignment];
             }
 
             if (EnableChartBorder)
@@ -182,14 +161,7 @@ public class Bar : Chart
                     // Set chart border properties
                     Color = GetDrawingColor(ChartBorderColor),
                     Width = ChartBorderSize,
-                    Pattern = ChartBorderStyle switch
-                    {
-                        BorderStyles.Solid => LinePattern.Solid,
-                        BorderStyles.Dashed => LinePattern.Dashed,
-                        BorderStyles.Dotted => LinePattern.Dotted,
-                        BorderStyles.DenselyDashed => LinePattern.DenselyDashed,
-                        _ => LinePattern.Solid
-                    }
+                    Pattern = ChartBorderStyleMap[ChartBorderStyle],
                 };
             }
 
@@ -204,35 +176,14 @@ public class Bar : Chart
             }
 
             // Set margins settings
-            myPlot.Axes.Margins(left: 0.1, right: 0.1, bottom: 0.1, top: 0.2);
+            myPlot.Axes.Margins(left: 0.05, right: 0.05, bottom: 0.05, top: 0.05);
 
             // Set filepath
 
             string Filepath = _outputFolderPath ?? Directory.GetCurrentDirectory();
 
-            // Set filename
-            switch (Format)
-            {
-                case Formats.png:
-                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
-                    break;
-                case Formats.jpg:
-                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpeg"), width, height);
-                    break;
-                case Formats.jpeg:
-                    myPlot.SaveJpeg(Path.Combine(Filepath, $"{filename}.jpg"), width, height);
-                    break;
-                case Formats.bmp:
-                    myPlot.SaveBmp(Path.Combine(Filepath, $"{filename}.bmp"), width, height);
-                    break;
-                case Formats.svg:
-                    myPlot.SaveSvg(Path.Combine(Filepath, $"{filename}.svg"), width, height);
-                    break;
-                default:
-                    myPlot.SavePng(Path.Combine(Filepath, $"{filename}.png"), width, height);
-                    break;
-            }
-        }
+            // Save Plot
+            return SaveInFormat(myPlot, width, height,Filepath, filename, Format);        }
         else
         {
             throw new ArgumentException("Error: Values and labels must be equal.");

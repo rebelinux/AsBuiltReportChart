@@ -180,7 +180,7 @@ namespace AsBuiltReportChart.PowerShell
 
                 Chart.Format = Format;
                 Pie myPie = new();
-                myPie.Chart(Values, Labels, Filename, Width, Height);
+                WriteObject(myPie.Chart(Values, Labels, Filename, Width, Height));
             }
             else
             {
