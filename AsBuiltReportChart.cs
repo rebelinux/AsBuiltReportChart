@@ -6,14 +6,8 @@ namespace AsBuiltReportChart
     {
         public static void Main(string[] args)
         {
-            List<double[]> values =
-            [
-                [3, 5,20],
-                [8, 20,33],
-                [5, 10,23]
-            ];
-            string[] labels = ["Aggr0", "Aggr1", "Aggr2"];
-            string[] category = ["Used", "Free","Papa"];
+            double []values = [3, 2];
+            string[] labels = ["Cassa", "Carro"];
 
             Chart.EnableLegend = true;
             Chart.LegendFontColor = BasicColors.Black;
@@ -33,15 +27,16 @@ namespace AsBuiltReportChart
             Chart.LegendOrientation = Orientations.Horizontal;
             Chart.LegendAlignment = Alignments.UpperCenter;
             Chart.LegendBorderSize = 0;
+            Chart.AxesMarginsTop = 0.2;
 
             Chart.ColorPalette = ColorPalettes.Dark;
 
-            Chart.AreaOrientation = Orientations.Vertical;
+            Chart.AreaOrientation = Orientations.Horizontal;
 
-            StackedBar myStackedBar = new();
+            Pie PieBar = new();
             Chart.Format = Formats.png;
 
-            myStackedBar.Chart(values, labels, category, width: 600, height: 600, filename: "StackedBarChartExample");
+            PieBar.Chart(values, labels,width: 600, height: 400, filename: "PieChartExample");
         }
     }
 }

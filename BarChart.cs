@@ -176,7 +176,7 @@ public class Bar : Chart
             }
 
             // Set margins settings
-            myPlot.Axes.Margins(left: 0.05, right: 0.05, bottom: 0.05, top: 0.05);
+            myPlot.Axes.Margins(left: AxesMarginsLeft, right: AxesMarginsRight, bottom: AxesMarginsDown, top: AxesMarginsTop);
 
             // Set filepath
 

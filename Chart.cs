@@ -266,6 +266,72 @@ public partial class Chart
         { BasicColors.DarkGreen,  Colors.DarkGreen },
     };
 
+    // Set area axes margins
+    internal static double _axesMarginsTop = 0.07;
+    public static double AxesMarginsTop
+    {
+        get { return _axesMarginsTop; }
+        set
+        {
+            if (value is >= 0.0 and <= 1)
+            {
+                _axesMarginsTop = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: AxesMarginsTop value range must be from 0.0 to 1.0 (fractions).");
+            }
+        }
+    }
+    internal static double _axesMarginsDown = 0.07;
+    public static double AxesMarginsDown
+    {
+        get { return _axesMarginsDown; }
+        set
+        {
+            if (value is >= 0.0 and <= 1)
+            {
+                _axesMarginsDown = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: AxesMarginsDown value range must be from 0.0 to 1.0 (fractions).");
+            }
+        }
+    }
+    internal static double _axesMarginsLeft = 0.05;
+    public static double AxesMarginsLeft
+    {
+        get { return _axesMarginsLeft; }
+        set
+        {
+            if (value is >= 0.0 and <= 1)
+            {
+                _axesMarginsLeft = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: AxesMarginsLeft value range must be from 0.0 to 1.0 (fractions).");
+            }
+        }
+    }
+    internal static double _axesMarginsRight = 0.05;
+    public static double AxesMarginsRight
+    {
+        get { return _axesMarginsRight; }
+        set
+        {
+            if (value is >= 0.0 and <= 1)
+            {
+                _axesMarginsRight = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error: AxesMarginsRight value range must be from 0.0 to 1.0 (fractions).");
+            }
+        }
+    }
+
     public static Color GetDrawingColor(BasicColors color)
     {
         return ColorMap[color];

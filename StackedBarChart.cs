@@ -49,7 +49,6 @@ public class StackedBar : Chart
 
             // myPlot.Axes.Bottom.TickLabelStyle.Rotation = -10;
 
-
             myPlot.Axes.Left.Label.Text = AreaOrientation switch
             {
                 Orientations.Horizontal => LabelXAxis,
@@ -171,7 +170,7 @@ public class StackedBar : Chart
                 myPlot.Legend.OutlineColor = GetDrawingColor(LegendBorderColor);
                 myPlot.Legend.OutlineWidth = LegendBorderSize;
 
-                myPlot.Legend.OutlinePattern = LegendBorderStyleMap[LegendBorderStyle] ;
+                myPlot.Legend.OutlinePattern = LegendBorderStyleMap[LegendBorderStyle];
 
                 myPlot.Legend.Orientation = LegendOrientationMap[LegendOrientation];
 
@@ -200,7 +199,14 @@ public class StackedBar : Chart
             }
 
             // Set margins settings
-            myPlot.Axes.Margins(left: 0.1, right: 0.1, bottom: 0.1, top: 0.2);
+            if (AreaOrientation == Orientations.Horizontal)
+            {
+                myPlot.Axes.Margins(left: AxesMarginsLeft, right: AxesMarginsRight, bottom: AxesMarginsDown, top: AxesMarginsTop);
+            }
+            else
+            {
+                myPlot.Axes.Margins(left: AxesMarginsLeft, right: AxesMarginsRight, bottom: AxesMarginsDown, top: AxesMarginsTop);
+            }
 
             // Set filepath
 

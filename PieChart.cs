@@ -94,6 +94,9 @@ public class Pie : Chart
                 myPlot.Axes.Title.Label.FontName = FontName;
             }
 
+            // Set margins settings
+            myPlot.Axes.Margins(left: AxesMarginsLeft, right: AxesMarginsRight, bottom: AxesMarginsDown, top: AxesMarginsTop);
+
             // Set filetpath to save
             string Filepath = _outputFolderPath ?? Directory.GetCurrentDirectory();
 

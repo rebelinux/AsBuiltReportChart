@@ -103,6 +103,19 @@ namespace AsBuiltReportChart.PowerShell
         [Parameter(Mandatory = false)]
         public Enums.Orientations AreaOrientation { get; set; } = Enums.Orientations.Vertical;
 
+        // this set the area axes margins  (Bar Chart)
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsTop { get; set; } = 0.2;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsDown { get; set; } = 0.05;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsLeft { get; set; } =  0.05;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsRight { get; set; } =  0.05;
+
         // Set chart Size WxH
         [Parameter(Mandatory = false)]
         public int Width { get; set; } = 400;
@@ -183,6 +196,12 @@ namespace AsBuiltReportChart.PowerShell
 
                 // this set the orientation chart area  (Bar Chart)
                 Chart.AreaOrientation = AreaOrientation;
+
+                // this set the area axes margins  (Bar Chart)
+                Chart.AxesMarginsTop = AxesMarginsTop;
+                Chart.AxesMarginsDown= AxesMarginsDown;
+                Chart.AxesMarginsLeft = AxesMarginsLeft;
+                Chart.AxesMarginsRight = AxesMarginsRight;
 
                 // Set file directory save path 
                 Chart.OutputFolderPath = OutputFolderPath;

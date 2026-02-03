@@ -97,6 +97,19 @@ namespace AsBuiltReportChart.PowerShell
         [ValidateSet("0.5", "0.6", "0.7", "0.8", "0.9")]
         public double LabelDistance { get; set; } = 0.6;
 
+        // this set the area axes margins  (Bar Chart)
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsTop { get; set; } = 0.2;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsDown { get; set; } = 0.05;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsLeft { get; set; } = 0.05;
+
+        [Parameter(Mandatory = false)]
+        public double AxesMarginsRight { get; set; } = 0.05;
+
         // Set chart Size WxH
         [Parameter(Mandatory = false)]
         public int Width { get; set; } = 400;
@@ -156,6 +169,12 @@ namespace AsBuiltReportChart.PowerShell
                 {
                     Chart.ColorPalette = ColorPalette;
                 }
+
+                // this set the area axes margins  (Bar Chart)
+                Chart.AxesMarginsTop = AxesMarginsTop;
+                Chart.AxesMarginsDown = AxesMarginsDown;
+                Chart.AxesMarginsLeft = AxesMarginsLeft;
+                Chart.AxesMarginsRight = AxesMarginsRight;
 
                 // Title settings
                 if (Title != null)
