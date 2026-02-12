@@ -18,4 +18,4 @@
 - [x] Implement code to set Charts Magins (top, buttom, left, right)
 - [x] implement outputfolder
 - [ ] Add feature to set BarChart bar width and space separation
-- [ ] Add option to revert pallete colors
+- [x] Add option to revert pallete colors
