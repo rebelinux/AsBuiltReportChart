@@ -88,73 +88,48 @@ public partial class Chart
     public static BasicColors ChartBorderColor { get; set; } = BasicColors.Black;  // Todo change this to rgb color
 
     // Color Palette settings (All Charts)
+    internal static readonly IReadOnlyDictionary<ColorPalettes, IPalette> ColorPaletteMap = new Dictionary<ColorPalettes, IPalette>()
+    {
+            { ColorPalettes.Amber, new ScottPlot.Palettes.Amber() },
+            { ColorPalettes.Category10, new ScottPlot.Palettes.Category10() },
+            { ColorPalettes.Category20, new ScottPlot.Palettes.Category20() },
+            { ColorPalettes.Aurora, new ScottPlot.Palettes.Aurora() },
+            { ColorPalettes.Building, new ScottPlot.Palettes.Building() },
+            { ColorPalettes.ColorblindFriendly, new ScottPlot.Palettes.ColorblindFriendly() },
+            { ColorPalettes.Dark, new ScottPlot.Palettes.Dark() },
+            { ColorPalettes.DarkPastel, new ScottPlot.Palettes.DarkPastel() },
+            { ColorPalettes.Frost, new ScottPlot.Palettes.Frost() },
+            { ColorPalettes.LightOcean, new ScottPlot.Palettes.LightOcean() },
+            { ColorPalettes.LightSpectrum, new ScottPlot.Palettes.LightSpectrum() },
+            { ColorPalettes.Microcharts, new ScottPlot.Palettes.Microcharts() },
+            { ColorPalettes.Nero, new ScottPlot.Palettes.Nero() },
+            { ColorPalettes.Nord, new ScottPlot.Palettes.Nord() },
+            { ColorPalettes.Normal, new ScottPlot.Palettes.Normal() },
+            { ColorPalettes.OneHalf, new ScottPlot.Palettes.OneHalf() },
+            { ColorPalettes.OneHalfDark, new ScottPlot.Palettes.OneHalfDark() },
+            { ColorPalettes.PastelWheel, new ScottPlot.Palettes.PastelWheel() },
+            { ColorPalettes.Penumbra, new ScottPlot.Palettes.Penumbra() },
+            { ColorPalettes.PolarNight, new ScottPlot.Palettes.PolarNight() },
+            { ColorPalettes.Redness, new ScottPlot.Palettes.Redness() },
+            { ColorPalettes.SnowStorm, new ScottPlot.Palettes.SnowStorm() },
+            { ColorPalettes.SummerSplash, new ScottPlot.Palettes.SummerSplash() },
+            { ColorPalettes.Tsitsulin, new ScottPlot.Palettes.Tsitsulin() },
+    };
     internal static IPalette? colorPalette;
     public static ColorPalettes? ColorPalette
     {
-        get => colorPalette switch
-        {
-            ScottPlot.Palettes.Amber => Enums.ColorPalettes.Amber,
-            ScottPlot.Palettes.Category10 => Enums.ColorPalettes.Category10,
-            ScottPlot.Palettes.Category20 => Enums.ColorPalettes.Category20,
-            ScottPlot.Palettes.Aurora => Enums.ColorPalettes.Aurora,
-            ScottPlot.Palettes.Building => Enums.ColorPalettes.Building,
-            ScottPlot.Palettes.ColorblindFriendly => Enums.ColorPalettes.ColorblindFriendly,
-            // ScottPlot.Palettes.ColorblindFriendlyDark => Enums.ColorPalettes.ColorblindFriendlyDark,
-            ScottPlot.Palettes.Dark => Enums.ColorPalettes.Dark,
-            ScottPlot.Palettes.DarkPastel => Enums.ColorPalettes.DarkPastel,
-            ScottPlot.Palettes.Frost => Enums.ColorPalettes.Frost,
-            ScottPlot.Palettes.LightOcean => Enums.ColorPalettes.LightOcean,
-            ScottPlot.Palettes.LightSpectrum => Enums.ColorPalettes.LightSpectrum,
-            ScottPlot.Palettes.Microcharts => Enums.ColorPalettes.Microcharts,
-            ScottPlot.Palettes.Nero => Enums.ColorPalettes.Nero,
-            ScottPlot.Palettes.Nord => Enums.ColorPalettes.Nord,
-            ScottPlot.Palettes.Normal => Enums.ColorPalettes.Normal,
-            ScottPlot.Palettes.OneHalf => Enums.ColorPalettes.OneHalf,
-            ScottPlot.Palettes.OneHalfDark => Enums.ColorPalettes.OneHalfDark,
-            ScottPlot.Palettes.PastelWheel => Enums.ColorPalettes.PastelWheel,
-            ScottPlot.Palettes.Penumbra => Enums.ColorPalettes.Penumbra,
-            ScottPlot.Palettes.PolarNight => Enums.ColorPalettes.PolarNight,
-            ScottPlot.Palettes.Redness => Enums.ColorPalettes.Redness,
-            ScottPlot.Palettes.SnowStorm => Enums.ColorPalettes.SnowStorm,
-            ScottPlot.Palettes.SummerSplash => Enums.ColorPalettes.SummerSplash,
-            ScottPlot.Palettes.Tsitsulin => Enums.ColorPalettes.Tsitsulin,
-            _ => Enums.ColorPalettes.Normal
-        };
+        get => ColorPaletteMap.FirstOrDefault(x => x.Value == colorPalette).Key;
         set
         {
-            colorPalette = value switch
+            if (value is not null)
             {
-                ColorPalettes.Amber => new ScottPlot.Palettes.Amber(),
-                ColorPalettes.Category10 => new ScottPlot.Palettes.Category10(),
-                ColorPalettes.Category20 => new ScottPlot.Palettes.Category20(),
-                ColorPalettes.Aurora => new ScottPlot.Palettes.Aurora(),
-                ColorPalettes.Building => new ScottPlot.Palettes.Building(),
-                ColorPalettes.ColorblindFriendly => new ScottPlot.Palettes.ColorblindFriendly(),
-                // ColorPalettes.ColorblindFriendlyDark => new ScottPlot.Palettes.ColorblindFriendlyDark(),
-                ColorPalettes.Dark => new ScottPlot.Palettes.Dark(),
-                ColorPalettes.DarkPastel => new ScottPlot.Palettes.DarkPastel(),
-                ColorPalettes.Frost => new ScottPlot.Palettes.Frost(),
-                ColorPalettes.LightOcean => new ScottPlot.Palettes.LightOcean(),
-                ColorPalettes.LightSpectrum => new ScottPlot.Palettes.LightSpectrum(),
-                ColorPalettes.Microcharts => new ScottPlot.Palettes.Microcharts(),
-                ColorPalettes.Nero => new ScottPlot.Palettes.Nero(),
-                ColorPalettes.Nord => new ScottPlot.Palettes.Nord(),
-                ColorPalettes.Normal => new ScottPlot.Palettes.Normal(),
-                ColorPalettes.OneHalf => new ScottPlot.Palettes.OneHalf(),
-                ColorPalettes.OneHalfDark => new ScottPlot.Palettes.OneHalfDark(),
-                ColorPalettes.PastelWheel => new ScottPlot.Palettes.PastelWheel(),
-                ColorPalettes.Penumbra => new ScottPlot.Palettes.Penumbra(),
-                ColorPalettes.PolarNight => new ScottPlot.Palettes.PolarNight(),
-                ColorPalettes.Redness => new ScottPlot.Palettes.Redness(),
-                ColorPalettes.SnowStorm => new ScottPlot.Palettes.SnowStorm(),
-                ColorPalettes.SummerSplash => new ScottPlot.Palettes.SummerSplash(),
-                ColorPalettes.Tsitsulin => new ScottPlot.Palettes.Tsitsulin(),
-                _ => new ScottPlot.Palettes.Category10()
-            };
+                colorPalette = ColorPaletteMap[value.Value];
+            }
         }
     }
 
     // Custom color palette (All Charts)
+    public static bool InvertCustomColorPalette;
     internal static string[]? _customColorPalette;
     public static string[] CustomColorPalette
     {
@@ -175,7 +150,15 @@ public partial class Chart
             {
                 throw new ArgumentException("Error: CustomColorPalette cannot be null or empty when setting custom colors.");
             }
-            _customColorPalette = value;
+            if (InvertCustomColorPalette)
+            {
+                Array.Reverse(value);
+                _customColorPalette = value;
+            }
+            else
+            {
+                _customColorPalette = value;
+            }
         }
     }
     public static bool EnableCustomColorPalette { get; set; }

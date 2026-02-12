@@ -6,7 +6,7 @@ namespace AsBuiltReportChart
     {
         public static void Main(string[] args)
         {
-            double []values = [3, 2];
+            double[] values = [3, 2];
             string[] labels = ["Cassa", "Carro"];
 
             Chart.EnableLegend = true;
@@ -29,14 +29,17 @@ namespace AsBuiltReportChart
             Chart.LegendBorderSize = 0;
             Chart.AxesMarginsTop = 0.2;
 
-            Chart.ColorPalette = ColorPalettes.Dark;
+            // Chart.ColorPalette = ColorPalettes.Dark;
 
             Chart.AreaOrientation = Orientations.Horizontal;
-
             Pie PieBar = new();
             Chart.Format = Formats.png;
 
-            PieBar.Chart(values, labels,width: 600, height: 400, filename: "PieChartExample");
+            Chart.EnableCustomColorPalette = true;
+            Chart.InvertCustomColorPalette = true;
+            Chart.CustomColorPalette = ["#DFF0D0", "#FFF4C7", "#FEDDD7", "#878787", "#77a898", "#5e9584", "#458370", "#2a715d", "#005f4b"];
+
+            PieBar.Chart(values, labels, width: 600, height: 400, filename: "PieChartExample");
         }
     }
 }
